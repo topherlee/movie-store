@@ -3,10 +3,24 @@ from django.contrib import admin
 from movie_store.models import Artist, Director, Genre, IMDB_rating, Movies, Year_released
 
 # Register your models here.
-admin.site.register(Year_released)
-admin.site.register(IMDB_rating)
+class ArtistInline(admin.TabularInline):
+    model = Movies.artist.through
+
+class ArtistAdmin(admin.ModelAdmin):
+    inlines = [
+        ArtistInline,
+    ]
+
+class MoviesAdmin(admin.ModelAdmin):
+    inlines = [
+        ArtistInline,
+    ]
+    exclude = ('artist',)
+
+admin.site.register(Artist, ArtistAdmin)
 admin.site.register(Director)
-admin.site.register(Artist)
 admin.site.register(Genre)
-admin.site.register(Movies)
+admin.site.register(IMDB_rating)
+admin.site.register(Movies, MoviesAdmin)
+admin.site.register(Year_released)
 
