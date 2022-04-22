@@ -1,0 +1,34 @@
+{% extends 'movie_store/layout.html' %}
+
+{% block title %}
+{{ movie.title }} - Movie Store
+{% endblock %}
+
+{% block content %}
+<h1>{{ movie.title }} </h1>
+<p>{{ movie.year_released }} &#183; {{ movie.certificate }} &#183; {{ movie.runtime }} min</p>
+<img src="{{ movie.poster_link }}">
+<p>Genre: 
+    <br>
+    {% for genre in movie.genre.all %}
+    {% if not forloop.last %}
+         {{ genre }},
+      {% else %}
+         {{ genre }}
+      {% endif %}
+    {% endfor %}
+</p>
+<p>Plot summary: <br> {{ movie.plot_summary }}</p>
+<p>
+    Cast:
+    <br>
+    {% for cast in movie.artist.all %}
+    {% if not forloop.last %}
+         {{ cast }},
+      {% else %}
+         {{ cast }}
+      {% endif %}
+    {% endfor %}
+</p>
+
+{% endblock %}
