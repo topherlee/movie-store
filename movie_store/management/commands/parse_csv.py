@@ -1,17 +1,25 @@
 import csv
+import random
+import decimal
+from datetime import datetime
 from pathlib import Path
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
+from django.contrib.auth.models import User
+from faker import Faker
 from movie_store.models import Year_released,IMDB_rating,Director,Artist,Genre,Movies
 
 class Command(BaseCommand):
+    help = 'Load data from csv along with faker values into tables'
+    
     def handle(self, *args, **options):
+        Movies.objects.all().delete()
         Year_released.objects.all().delete()
         IMDB_rating.objects.all().delete()
         Director.objects.all().delete()
         Artist.objects.all().delete()
         Genre.objects.all().delete()
-        Movies.objects.all().delete()
+
         print("Tables dropped successfully")
 
         year_list,imdb_list,director_list,artist_list,genre_list = [],[],[],[],[]
