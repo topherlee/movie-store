@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from movie_store.models import Artist, Director, Genre, IMDB_rating, Movies, Year_released
+from movie_store.models import Artist, Director, Genre, IMDB_rating, Movies, Year_released, Customer
 
 # Register your models here.
 class ArtistInline(admin.TabularInline):
@@ -17,10 +17,11 @@ class MoviesAdmin(admin.ModelAdmin):
     ]
     exclude = ('artist',)
 
-admin.site.register(Artist, ArtistAdmin)
-admin.site.register(Director)
-admin.site.register(Genre)
-admin.site.register(IMDB_rating)
+#admin.site.register(Artist, ArtistAdmin)
+#admin.site.register(Director)
+#admin.site.register(Genre)
+#admin.site.register(IMDB_rating)
 admin.site.register(Movies, MoviesAdmin)
-admin.site.register(Year_released)
+#admin.site.register(Year_released)
+admin.site.register(Customer)
 
