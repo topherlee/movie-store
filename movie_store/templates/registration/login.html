@@ -1,4 +1,7 @@
 {% extends 'movie_store/layout.html' %}
+{% block title %}
+Login - Movie Store
+{% endblock %}
 {% block content %}
     <h1>Login - Movie Store</h1>
     {% if form.errors %}
@@ -12,7 +15,7 @@
      
     {% endif %}
   {% endif %}
-  <p>Please login, or <a href = " url 'shop:signup' ">Register</a> to see this page.</p>
+  <p>Please login, or <a href = "{% url 'signup' %}">Register</a> to see this page.</p>
   <form method="POST" action="{% url 'login' %}"> 
     {% csrf_token %}
     <p>
