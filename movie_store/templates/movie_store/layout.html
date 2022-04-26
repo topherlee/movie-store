@@ -7,8 +7,14 @@
     <body>
         <a href="/">Home</a> |
         <a href="/movies">Movies</a> |
+        {% if user.is_staff %}
         <a href="/orders">Orders</a> |
-        <h1>Movie Store</h1>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <a href="/accounts/logout">Logout ({{ user.username }})</a> |
+        {% else %}
+        <a href="/accounts/login">Login</a>
+        {% endif %}
         {% block content %}{% endblock %}
     </body>
 </html>

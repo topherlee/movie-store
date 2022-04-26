@@ -6,6 +6,10 @@ from django.dispatch import receiver
 
 # Create your models here.
 class Year_released(models.Model):
+
+    class Meta:
+        ordering = ['year']
+
     year = models.IntegerField(unique=True, validators=[MaxValueValidator(2022),MinValueValidator(1800)])
 
     def __str__(self):
@@ -13,24 +17,36 @@ class Year_released(models.Model):
 
 class IMDB_rating(models.Model):
     rating = models.DecimalField(unique=True, decimal_places=1, max_digits=3)
-
+    
+    class Meta:
+        ordering = ['rating']
+    
     def __str__(self):
         return str(self.rating)
 
 class Director(models.Model):
     name = models.CharField(unique=True, max_length=200)
+    
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return str(self.name)
 
 class Artist(models.Model):
     name = models.CharField(unique=True, max_length=200)
-    
+
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return str(self.name)
 
 class Genre(models.Model):
     genre = models.CharField(unique=True, max_length=200)
+
+    class Meta:
+        ordering = ['genre']
 
     def __str__(self):
         return str(self.genre)
