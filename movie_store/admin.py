@@ -22,6 +22,7 @@ class MoviesAdmin(admin.ModelAdmin):
 #admin.site.register(Genre)
 #admin.site.register(IMDB_rating)
 admin.site.register(Movies, MoviesAdmin)
+#admin.site.register(Movies)
 #admin.site.register(Year_released)
 admin.site.register(Customer)
 
