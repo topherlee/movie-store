@@ -14,7 +14,7 @@ class Director(models.Model):
     def __str__(self):
         return str(self.name)
 
-class Artist(models.Model):
+class Actor(models.Model):
     name = models.CharField(unique=True, max_length=200)
 
     class Meta:
@@ -32,18 +32,21 @@ class Genre(models.Model):
     def __str__(self):
         return str(self.genre)
 
-class Movies(models.Model):
+class Movie(models.Model):
+    title = models.CharField(max_length=1000)   
     year_released = models.IntegerField(validators=[MaxValueValidator(2030),MinValueValidator(1800)])
-    title = models.CharField(max_length=1000)
-    imdb_rating = models.DecimalField(decimal_places=1, max_digits=3)
+    imdb_rating = models.DecimalField(decimal_places=1, max_digits=3, null=True, blank=True)
+    imdb_votes = models.CharField(max_length=100, blank=True)
     director = models.ForeignKey(Director, on_delete=models.CASCADE)
-    artist = models.ManyToManyField(Artist)
+    actor = models.ManyToManyField(Actor)
     genre = models.ManyToManyField(Genre)
-    runtime = models.IntegerField()
-    certificate = models.CharField(null=True, max_length=50)
-    plot_summary = models.TextField()
+    metascore = models.IntegerField(null=True, blank=True, validators=[MaxValueValidator(100),MinValueValidator(0)])
+    runtime = models.IntegerField(blank=True, null=True)
+    rating = models.CharField(blank=True, null=True, max_length=50)
+    plot_summary = models.TextField(blank=True)
+    tagline = models.TextField(blank=True)
     poster_link = models.URLField()
-    gross = models.CharField(null=True, max_length=200)
+    imdb_link = models.URLField(blank=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     created_date = models.DateTimeField(auto_now_add=True)
 
@@ -51,7 +54,7 @@ class Movies(models.Model):
         return f'{self.title},{self.price}'
 
 class Cart(models.Model):
-    product = models.ForeignKey(Movies, on_delete=models.CASCADE)
+    product = models.ForeignKey(Movie, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     created_date = models.DateTimeField(auto_now_add=True)
 
@@ -87,7 +90,7 @@ class Order(models.Model):
 
 class LineItem(models.Model):
     quantity = models.IntegerField()
-    product = models.ForeignKey(Movies, on_delete=models.CASCADE)
+    product = models.ForeignKey(Movie, on_delete=models.CASCADE)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)

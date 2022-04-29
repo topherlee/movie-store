@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from movie_store.models import Artist, Director, Genre, Movies, Customer
+from movie_store.models import Actor, Director, Genre, Movie, Customer
 
 # Register your models here.
 class ArtistInline(admin.TabularInline):
-    model = Movies.artist.through
+    model = Movie.actor.through
 
 class ArtistAdmin(admin.ModelAdmin):
     inlines = [
@@ -15,12 +15,12 @@ class MoviesAdmin(admin.ModelAdmin):
     inlines = [
         ArtistInline,
     ]
-    exclude = ('artist',)
+    exclude = ('actor',)
 
 #admin.site.register(Artist, ArtistAdmin)
 #admin.site.register(Director)
 #admin.site.register(Genre)
-admin.site.register(Movies, MoviesAdmin)
+admin.site.register(Movie, MoviesAdmin)
 #admin.site.register(Movies)
 admin.site.register(Customer)
 

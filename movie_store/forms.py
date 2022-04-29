@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Movies, Director
+from .models import Movie, Director
 
 class SignUpForm(UserCreationForm):
     username = forms.CharField(max_length=30)
@@ -18,5 +18,5 @@ class MoviesForm (forms.ModelForm):
     #title = forms.CharField(label='Title',max_length=500)
     
     class Meta:
-        model = Movies
+        model = Movie
         fields = "__all__"#('title','price','year_released','imdb_rating','director')

@@ -2,12 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
-from ..models import Movies
+from ..models import Movie
 from ..forms import MoviesForm
 from django.utils import timezone 
  
 def movie_list(request):
-    movies = Movies.objects.all()
+    movies = Movie.objects.all()
     paginator = Paginator(movies, 24)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -17,7 +17,7 @@ def movie_list(request):
     return render(request, 'movie_store/movie_list.html', context)
 
 def movie_details(request, id):
-    movie = get_object_or_404(Movies, id=id)
+    movie = get_object_or_404(Movie, id=id)
     context = {
         'movie':movie
     }
@@ -26,7 +26,7 @@ def movie_details(request, id):
 @login_required
 def movie_modify(request, id=None):
     if id is not None:
-        movie = get_object_or_404(Movies, id=id)
+        movie = get_object_or_404(Movie, id=id)
     else:
         movie = None
     

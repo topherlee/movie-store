@@ -7,7 +7,7 @@
 {% block content %}
 <h1>Movie Store</h1>
 <h1>{{ movie.title }} </h1>
-<p>{{ movie.year_released }} &#183; {{ movie.certificate }} &#183; {{ movie.runtime }} min &#183; </p>
+<p>{{ movie.year_released }} &#183; {{ movie.rating }} &#183; {{ movie.runtime }} min &#183; </p>
 <img src="{{ movie.poster_link }}">
 <p>Price: {{ movie.price }}</p>
 <p>IMDb Rating: {{ movie.imdb_rating }}</p>
@@ -26,7 +26,7 @@
 <p>
     Cast:
     <br>
-    {% for cast in movie.artist.all %}
+    {% for cast in movie.actor.all %}
     {% if not forloop.last %}
          {{ cast }},
       {% else %}
