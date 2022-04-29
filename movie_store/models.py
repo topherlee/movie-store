@@ -5,25 +5,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 # Create your models here.
-class Year_released(models.Model):
-
-    class Meta:
-        ordering = ['year']
-
-    year = models.IntegerField(unique=True, validators=[MaxValueValidator(2022),MinValueValidator(1800)])
-
-    def __str__(self):
-        return str(self.year)
-
-class IMDB_rating(models.Model):
-    rating = models.DecimalField(unique=True, decimal_places=1, max_digits=3)
-    
-    class Meta:
-        ordering = ['rating']
-    
-    def __str__(self):
-        return str(self.rating)
-
 class Director(models.Model):
     name = models.CharField(unique=True, max_length=200)
     
@@ -52,9 +33,9 @@ class Genre(models.Model):
         return str(self.genre)
 
 class Movies(models.Model):
-    year_released = models.ForeignKey(Year_released, on_delete=models.CASCADE)
+    year_released = models.IntegerField(validators=[MaxValueValidator(2030),MinValueValidator(1800)])
     title = models.CharField(max_length=1000)
-    imdb_rating = models.ForeignKey(IMDB_rating, on_delete=models.CASCADE)
+    imdb_rating = models.DecimalField(decimal_places=1, max_digits=3)
     director = models.ForeignKey(Director, on_delete=models.CASCADE)
     artist = models.ManyToManyField(Artist)
     genre = models.ManyToManyField(Genre)

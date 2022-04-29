@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import IMDB_rating, Movies, Year_released, Director
+from .models import Movies, Director
 
 class SignUpForm(UserCreationForm):
     username = forms.CharField(max_length=30)

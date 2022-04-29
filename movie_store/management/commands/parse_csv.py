@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand
 from django.db import IntegrityError
 from django.contrib.auth.models import User
 from faker import Faker
-from movie_store.models import Year_released,IMDB_rating,Director,Artist,Genre,Movies,Cart,Customer,LineItem,Order
+from movie_store.models import Director,Artist,Genre,Movies,Cart,Customer,LineItem,Order
 
 class Command(BaseCommand):
     help = 'Load data from csv along with faker values into tables'
@@ -19,15 +19,13 @@ class Command(BaseCommand):
         Order.objects.all().delete()
         Customer.objects.all().delete()
         User.objects.all().delete()
-        Year_released.objects.all().delete()
-        IMDB_rating.objects.all().delete()
         Director.objects.all().delete()
         Artist.objects.all().delete()
         Genre.objects.all().delete()
 
         print("Tables dropped successfully")
 
-        year_list,imdb_list,director_list,artist_list,genre_list = [],[],[],[],[]
+        director_list,artist_list,genre_list = [],[],[]
         base_dir = Path(__file__).resolve().parent.parent.parent.parent
         
         with open(f'{base_dir}/movie_store/data/imdb_top_1000.csv', 'r') as file:
@@ -35,17 +33,6 @@ class Command(BaseCommand):
             next(csvfile)
             for count, line in enumerate(csvfile):
                 print("line",count)
-                year = line[2]
-                if year not in year_list:
-                    year_list.append(year)
-                    year_released = Year_released.objects.create(year=year)
-                    year_released.save()
-
-                rating = line[6]
-                if rating not in imdb_list:
-                    imdb_list.append(rating)
-                    imdb_rating = IMDB_rating.objects.create(rating=rating)
-                    imdb_rating.save()
 
                 director = line[9]
                 if director not in director_list:
@@ -69,8 +56,8 @@ class Command(BaseCommand):
                 movie = line[1]
                 movie_name = Movies(
                     title = movie,
-                    year_released = Year_released.objects.get(year=year),
-                    imdb_rating = IMDB_rating.objects.get(rating=rating),
+                    year_released = line[2],
+                    imdb_rating = line[6],
                     director = Director.objects.get(name=director),
                     runtime = [int(word) for word in line[4].split() if word.isdigit()][0],
                     certificate = line[3],

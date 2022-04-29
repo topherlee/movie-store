@@ -12,9 +12,9 @@ def order_list(request):
 def order_details(request, id):
     order = get_object_or_404(Order, id=id)
     customer = order.customer
-    user = get_object_or_404(User, id=customer.pk)
+    username = get_object_or_404(User, id=customer.pk)
     line_items = LineItem.objects.filter(order_id=order.id)
     context = {
-        'order':order, 'user':user, 'line_items':line_items, 'customer':customer
+        'order':order, 'username':username, 'line_items':line_items, 'customer':customer
     }
     return render(request, 'movie_store/order_details.html', context)
