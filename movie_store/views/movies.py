@@ -8,7 +8,7 @@ from django.utils import timezone
  
 def movie_list(request):
     movies = Movie.objects.all()
-    paginator = Paginator(movies, 24)
+    paginator = Paginator(movies, 25)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {

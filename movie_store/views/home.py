@@ -42,13 +42,13 @@ def search(request):
         request.session['search'] = search
 
     if search == "director":
-        results = Director.objects.filter(name__iregex=fr"{query}+")    #director__name__contains=f'{query}')
+        results = Director.objects.filter(name__iregex=fr"{query}")    #director__name__contains=f'{query}')
     elif search == "artist":
-        results = Actor.objects.filter(name__iregex=fr"{query}+")
+        results = Actor.objects.filter(name__iregex=fr"{query}")
     elif search == "title":
-        results = Movie.objects.filter(title__iregex=fr"{query}+")
+        results = Movie.objects.filter(title__iregex=fr"({query})")
 
-    paginator = Paginator(results, 10)
+    paginator = Paginator(results, 25)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
