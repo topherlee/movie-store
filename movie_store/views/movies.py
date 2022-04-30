@@ -36,7 +36,7 @@ def movie_modify(request, id=None):
             new_movie = form.save(commit=False)
             new_movie.created_date = timezone.now()
             new_movie.save()
-            new_movie.save_m2m()
+            form.save_m2m()
             return redirect('movie_details', id=new_movie.id)
     else:
         form = MoviesForm(instance=movie)
