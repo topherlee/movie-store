@@ -1,16 +1,16 @@
 {% extends 'movie_store/layout.html' %}
 
 {% block title %}
-{{ movie.title }} - Movie Store
+{{ movie.title }} ({{ movie.year_released }}) - Movie Store
 {% endblock %}
 
 {% block content %}
 <h1>Movie Store</h1>
 <h1>{{ movie.title }} </h1>
-<p>{{ movie.year_released }} &#183; {{ movie.rating }} &#183; {{ movie.runtime }} min &#183; </p>
+<p>{{ movie.year_released }} &#183; {{ movie.rating }} &#183; {{ movie.runtime }} min </p>
 <img src="{{ movie.poster_link }}">
 <p>Price: {{ movie.price }}</p>
-<p>IMDb Rating: {{ movie.imdb_rating }}</p>
+<p>IMDb Rating: <a href = "{{ movie.imdb_link }}">{{ movie.imdb_rating }} ({{ movie.imdb_votes }})</a></p>
 <p>Genre: 
     <br>
     {% for genre in movie.genre.all %}
@@ -22,6 +22,9 @@
     {% endfor %}
 </p>
 <p>Plot summary: <br> {{ movie.plot_summary }}</p>
+
+<p>Tagline: {{ movie.tagline }}</p>
+
 <p>Director: {{ movie.director.name }}</p>
 <p>
     Cast:

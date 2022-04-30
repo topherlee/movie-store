@@ -35,7 +35,8 @@ class Command(BaseCommand):
             for count, line in enumerate(csvfile):
                 print("line",count+1)
 
-                director = re.search("(?:\"|\')(.*?)(?:\"|\')",line[13])[0]
+                director = re.findall("(?:\"|\')(.*?)(?:\"|\')",line[13])[0]
+                print(director)
                 if director not in director_list:
                     director_list.append(director)
                     director_name = Director.objects.create(name=director)

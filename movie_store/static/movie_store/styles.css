@@ -1,0 +1,206 @@
+body{
+    background-color: F5F5F5;
+    padding: 0;
+    margin: 0;
+}
+
+.wrapper{
+    padding: 0;
+    margin:0;
+}
+
+.nav{
+    background-color: #013567;
+    word-spacing: 30px;
+    height: 40px;
+    padding-top: 0px;
+    margin: 0;
+}
+
+.body-top{
+    background-color: #005ea5;
+    word-spacing: 4px;
+    padding: 0;
+    margin: 0;
+    height: 90px;
+}
+
+.body-top h1{
+    margin-left: 5%;
+}
+.second-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-left: 4%;
+}
+
+.nav-buttons{
+    padding-top: 10px;
+    margin-top: 0;
+    margin-left: 3%;
+    font-size: 20px;
+}
+
+.nav-buttons li{
+    display: inline;
+}
+
+.nav-buttons li a{
+    text-decoration: None;
+    color: white;
+}
+
+#nav-span{
+    word-spacing: 2px;
+}
+
+.page-title{
+    color: white;
+    margin: 0 1%;
+}
+
+.page-title-meta{
+    color: white;
+    margin: 0.2px 1%;
+}
+
+#search-bar{
+    margin: 1%;
+    width: 20%;
+    height: 30px;
+}
+
+.data-table-heading h1{
+    margin: 10px 5%;
+    text-align: center;
+}
+.data-table table{
+    border-collapse: collapse;
+    border: 3px solid #013567;
+    margin: 10px 5%;
+    width: 90%;
+}
+
+.data-table table th, td{
+    border: 1px solid #013567;
+    margin: 10px 5%;
+    text-align: center;
+}
+
+.home-table {
+
+}
+
+.home-table table{
+    border-collapse: collapse;
+    border: 3px solid #013567;
+    margin: 10px 5%;
+    width: 30%;
+    padding-top: 10px;
+
+}
+
+.home-table table th, td{
+    border: 1px solid #013567;
+    margin: 10px 5%;
+    height: 30px;
+    width: 10%;
+    padding-top: 10px;
+    text-align: center;
+
+}
+
+.home-table table td, a{
+    text-decoration: none;
+    color: blue;
+    font-weight: normal;
+
+}
+
+.home-table-title{
+    margin: 2% 5%;
+    word-spacing: 10px;
+}
+
+#air-pol-title{
+    margin: 2% 5%;
+}
+
+.air-pol-body{
+    display: flex;
+
+}
+
+.air-pol-content{
+    margin: 0% 4%;
+    width: 60%;
+    padding: 5px 20px;
+    line-height: 2;
+    height: 50%;
+    font-size: 22px;
+    background-color: #F5F5F5;
+}
+
+.air-pol-side{
+    margin: 5% 5%;
+    padding: 10px 30px;
+    width: 20%;
+    line-height: 3;
+    font-size: 20px;
+    background-color: #F5F5F5;
+
+}
+.air-pol-side h3{
+    text-align: center;
+}
+
+#air-pol-ref{
+    margin: 0 5%;
+}
+
+.pagination{
+    margin: 2% 35%;
+}
+
+.data-page-start{
+
+}
+
+#data-page-filter-title{
+    text-align: center;
+}
+
+.data-page-filter-form{
+    background-color: #F5F5F5;
+    width: 28%;
+    height: 10%;
+    margin: 2% 34%;
+    padding: 2% 20px;
+}
+
+.data-page-filter-form p{
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    margin: 0px 1px;
+}
+.data-page-select{
+    width: 70%;
+    height: 30px;
+    margin: 0 15%;
+    font-size: 20px;
+}
+
+#data-page-submit-button{
+    background-color: #013567;
+    color: #F5F5F5;
+    margin: 10px 15%;
+}
+
+.air-pol-img-card{
+    width: 120%;
+    height: 220px;
+    margin: 0 0%;
+}
