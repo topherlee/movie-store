@@ -6,10 +6,37 @@ Movie List - Movie Store
 
 {% block content %}
 <h1>Movie List - Movie Store</h1>
-{% for movie in page_obj %}
-    <a href='{% url 'movie_details' id=movie.id %}'>{{ movie.title|upper }}<br></a>
-    
-{% endfor %}
+<div class="page-movie">
+    {% for movie in page_obj %}
+    <div class="movie-card">
+        <a href='{% url 'movie_details' id=movie.id %}'>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="{{ movie.poster_link }}">
+                    </div>
+                    <div class="flip-card-back">
+                        <img src="{{ movie.poster_link }}">
+                        <h3>{{ movie.title }}</h3>
+                        <p>{{ movie.plot_summary }}</p>
+                        <p class="genre">
+                            {% for genre in movie.genre.all %}
+                            {% if not forloop.last %}
+                                {{ genre }},
+                            {% else %}
+                                {{ genre }}
+                            {% endif %}
+                            {% endfor %}
+                        </p>
+                        <p class="year">{{ movie.year_released }}</p>
+                    </div>
+                </div>
+            </div>
+            <span class="movie-title">{{ movie.title|upper }}</span>
+        </a>
+    </div>
+    {% endfor %}
+</div>
 
 <div class="pagination">
     <span class="step-links">
