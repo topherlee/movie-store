@@ -17,23 +17,18 @@ Movie List - Movie Store
                     </div>
                     <div class="flip-card-back">
                         <img src="{{ movie.poster_link }}">
-
-                        <div class="container">
-                            <h3>{{ movie.title }}</h3>
-                            <p>{{ movie.year_released }}</p>
-                            {% if movie.tagline %}
-                                <p>{{ movie.tagline }}</p>
+                        <h3>{{ movie.title }}</h3>
+                        <p>{{ movie.plot_summary }}</p>
+                        <p class="genre">
+                            {% for genre in movie.genre.all %}
+                            {% if not forloop.last %}
+                                {{ genre }},
+                            {% else %}
+                                {{ genre }}
                             {% endif %}
-                            <p>
-                                {% for genre in movie.genre.all %}
-                                {% if not forloop.last %}
-                                    {{ genre }},
-                                {% else %}
-                                    {{ genre }}
-                                {% endif %}
-                                {% endfor %}
-                            </p>
-                        </div>
+                            {% endfor %}
+                        </p>
+                        <p class="year">{{ movie.year_released }}</p>
                     </div>
                 </div>
             </div>

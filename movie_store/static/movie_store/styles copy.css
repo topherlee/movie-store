@@ -6,12 +6,7 @@ body{
     background-color: rgb(30, 29, 29);
     color: white;
     padding: 0;
-}
-
-.main-body{
-    margin-top: 2%;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin: 0;
 }
 
 a:link {
@@ -116,17 +111,78 @@ a:hover{
 
 }
 
+.data-table-heading h1{
+    margin: 10px 5%;
+    text-align: center;
+}
+.data-table table{
+    border-collapse: collapse;
+    border: 3px solid #013567;
+    margin: 10px 5%;
+    width: 90%;
+}
+
+.data-table table th, td{
+    border: 1px solid #013567;
+    margin: 10px 5%;
+    text-align: center;
+}
+
+.home-table {
+
+}
+
+.home-table table{
+    border-collapse: collapse;
+    border: 3px solid #013567;
+    margin: 10px 5%;
+    width: 30%;
+    padding-top: 10px;
+
+}
+
+.home-table table th, td{
+    border: 1px solid #013567;
+    margin: 10px 5%;
+    height: 30px;
+    width: 10%;
+    padding-top: 10px;
+    text-align: center;
+
+}
+
+.home-table table td, a{
+    text-decoration: none;
+    color: blue;
+    font-weight: normal;
+
+}
+
+.home-table-title{
+    margin: 2% 5%;
+    word-spacing: 10px;
+}
+
 .pagination{
     margin: 2% 35%;
 }
 
+.air-pol-img-card{
+    width: 120%;
+    height: 220px;
+    margin: 0 0%;
+}
+
 .movie-card{
-    display: grid;
+    margin: 1% 2%;
+    width: 15%;
     justify-content: space-evenly;
     padding: 2%;
+    border: 2px solid white;
 }
 
 .flip-card {
+    margin-left: 15%;
     background-color: transparent;
     width: 200px;
     height: 300px;
@@ -194,15 +250,10 @@ a:hover{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-left: 7%;
-    margin-right: 5%;
 }
 
 .movie-title{
     display: grid;
-    text-align: center;
+    justify-content: center;
     margin-top: 10px;
-    inline-size: 200px;
-    overflow-wrap: break-word;
-    border: 2px solid white;
 }

@@ -32,7 +32,6 @@
             {% block navbar %}
             <nav class="nav">
                 <ul class="nav-buttons">
-                    <li><a href="/">Home</a></li>
                     <li><a href="/movies">Movies</a></li>
                     {% if user.is_staff %}
                     <li><a href="/orders">Orders</a></li>
@@ -47,9 +46,10 @@
             </nav>
             {% endblock %}
             
-            {% block content %}
-            <div class="main-body"></div>
-            {% endblock %}
+            
+            <div class="main-body">
+                {% block content %}{% endblock %}
+            </div>
         </div>
     </body>
     {% endblock %}
