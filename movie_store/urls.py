@@ -14,4 +14,7 @@ urlpatterns = [
     path('order_details/<id>/', views.order_details, name='order_details'),
     path('search/', views.search, name='search'),
     path('signup/', views.signup, name='signup'),
+    path('basket_add/<int:movie_id>/', views.basket.basket_add, name ='basket_add'),
+    path('basket_remove/<int:movie_id>/', views.basket.basket_remove, name ='basket_remove'),
+    path('basket_detail/', views.basket.basket_detail, name ='basket_detail'),
 ]

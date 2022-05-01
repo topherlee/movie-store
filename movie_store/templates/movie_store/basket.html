@@ -1,0 +1,54 @@
+{% extends 'movie_store/layout.html' %}
+
+{% block title %}
+Your Basket - Movie Store
+{% endblock %}
+{% block content %}
+<div class="basket-page">
+    <h1>Your Basket:</h1>
+    <div class="banner">
+      <ul class="text-right">
+        <li><a href="{% url "movie_list" %}" class="button">
+          Continue shopping
+        </a></li>
+        <li><a href=" url 'purchase'">Checkout</a></li>
+      </ul>
+      
+    
+      <h2>
+        Subtotal {{ total }} ({% if item.quantity == 1 %}item{% else %}items{% endif %}):
+        ${{ basket.get_total_price }}
+      </h2>
+    </div>
+  <div class="movie-items">
+    {% for item in basket %}
+      {% with movie=item.movie %}
+      <div class="movie-item">
+        <a href="{% url 'movie_details' id=movie.id %}">
+          <img src="{{ movie.poster_link }}">
+        </a>
+              
+              <span class="movie-title"><a href="{% url 'movie_details' id=movie.id %}">{{ movie.title }}</span>
+              
+                <form class="update-price" action="{% url 'basket_add' movie.id %}" method="post">
+                  Qty: {{ item.update_quantity_form.quantity }}
+                  {{ item.update_quantity_form.override }}
+                  <input type="submit" value="Update">
+                  {% csrf_token %}
+                </form>
+              
+              
+                <form class="remove-item" action="{% url 'basket_remove' movie.id %}" method="post">
+                  <input type="submit" value="Remove">
+                  {% csrf_token %}
+                </form>
+              
+              <span class="price">${{ item.price }}</span>
+              <span class="subtotal">Subtotal ({{ item.quantity }} {% if item.quantity == 1 %}item{% else %}items{% endif %}): <b>${{ item.total_price }}</b></span>
+      </div>
+  
+        {% endwith %}
+      {% endfor %}
+  </div>
+</div>
+ {% endblock %}

@@ -16,6 +16,12 @@
       <img src="{{ movie.poster_link }}">
       <p>Watch the trailer</p>
    </a>
+   <form action="{% url 'basket_add' movie.id %}" method="post">
+      {{ basket_movie_form }}
+      {% csrf_token %}
+      <input type="submit" value="Add to Basket">
+   </form>
+   
 </div>
 <div class="movie-info-container">
    <p class="card">IMDb Rating <a href = "{{ movie.imdb_link }}"><b>{{ movie.imdb_rating }}</b>/10 ({{ movie.imdb_votes }} votes)</a></p>

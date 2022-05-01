@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from ..models import Movie
-from ..forms import MoviesForm
+from ..forms import BasketAddProductForm, MoviesForm
 from django.utils import timezone 
  
 def movie_list(request):
@@ -18,8 +18,10 @@ def movie_list(request):
 
 def movie_details(request, id):
     movie = get_object_or_404(Movie, id=id)
+    basket_movie_form = BasketAddProductForm()
     context = {
-        'movie':movie
+        'movie':movie,
+        'basket_movie_form':basket_movie_form,
     }
     return render(request, 'movie_store/movie_details.html', context)
 

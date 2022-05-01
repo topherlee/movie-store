@@ -118,6 +118,8 @@ USE_TZ = True
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
+BASKET_SESSION_ID = 'basket'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 

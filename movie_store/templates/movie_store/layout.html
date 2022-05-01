@@ -39,6 +39,7 @@
                             <li><a href="/movies/new/">Add a Movie</a></li>
                             {% endif %}
                             {% if user.is_authenticated %}
+                            <li><a href="/basket_detail/">Cart</a></li>
                             <li><a href="/accounts/logout">Logout ({{ user.get_username }})</a></li>
                             {% else %}
                             <li><a href="/accounts/login">Login</a></li>
