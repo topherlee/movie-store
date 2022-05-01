@@ -3,9 +3,20 @@
 }
 
 body{
-    background-color: rgb(30, 29, 29);
-    color: white;
+    background-color:bisque;
+    color: rgb(244, 240, 240);
     padding: 0;
+}
+
+
+.page-container{
+    margin: -10px;
+    position: relative;
+    min-height: 100vh;
+}
+
+.wrapper{
+    padding-bottom: 2.5rem;
 }
 
 .main-body{
@@ -13,21 +24,26 @@ body{
     margin-left: 5%;
     margin-right: 5%;
     padding-left: 0px;
+    color: black;
+}
+
+.main-body h1{
+    font-weight: 300;
 }
 
 a:link {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 a:visited{
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 a:hover{
     text-decoration: underline;
-    color: white;
+    color: black;
 }
 
 .body-top{
@@ -46,7 +62,7 @@ a:hover{
     -moz-animation: glow 1s ease-in-out infinite alternate;
     animation: glow 1s ease-in-out infinite alternate;
   }
-  
+
   @-webkit-keyframes glow {
     from {
       text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e69200, 0 0 40px #e69200, 0 0 50px #e69200, 0 0 60px #e69200, 0 0 70px #e69200;
@@ -71,7 +87,7 @@ a:hover{
     top: 0;
     background-color: #2f2b30;
     height: auto;
-    margin-top: -15px;
+    margin-top: -20px;
     z-index: 10;
 }
 
@@ -141,11 +157,15 @@ a:hover{
     text-align: center;
 }
 
+.pagination a{
+    color: cornflowerblue;
+}
+
 .movie-card{
     display: grid;
     justify-content: space-evenly;
     padding: 3%;
-    margin-left: -50px;
+    margin-left: -40px;
 }
 
 .flip-card {
@@ -153,6 +173,11 @@ a:hover{
     width: 200px;
     height: 300px;
     perspective: 1000px;
+    color: white;
+}
+
+.flip-card a{
+    color: white;
 }
 
 .flip-card-inner {
@@ -174,11 +199,12 @@ a:hover{
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .flip-card-front {
     background-color: #bbb;
-    color: black;
+    color: white;
 }
 
 .flip-card img{
@@ -210,6 +236,7 @@ a:hover{
     height: 100%;
     width: 100%;
     text-align:center;
+    color: white;
 }
 
 .page-movie{
@@ -238,13 +265,50 @@ a:hover{
     height: 2.5rem;
 }
 
-
-.page-container{
-    margin: 0;
-    position: relative;
-    min-height: 100vh;
+.movie-title-container{
+    font-size: x-large;
+    padding: 0;
 }
 
-.wrapper{
-    padding-bottom: 2.5rem;
+.movie-title-container h1{
+    font-weight: 200;
+}
+
+.year-released {
+    margin-top: -25px;
+    font-size: medium;
+}
+
+.movie-poster{
+    text-align: center;
+    width: fit-content;
+}
+
+.movie-poster img{
+    height: 402px;
+    width: 273px;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.movie-poster a{
+    color: cornflowerblue;
+}
+
+.movie-info-container{
+    position: relative;
+    top: -470px;
+    left: 350px;
+    width: 60%;
+    font-size: large;
+}
+
+.movie-info-container a{
+    color: cornflowerblue;
+}
+
+.card{
+    background-color: rgb(255, 255, 255);
+    color: #151414;
+    padding: 10px;
+    box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

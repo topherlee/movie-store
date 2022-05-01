@@ -5,37 +5,45 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{ movie.title }} </h1>
-<p>{{ movie.year_released }} &#183; {{ movie.rating }} &#183; {{ movie.runtime }} min </p>
-<img src="{{ movie.poster_link }}">
-<p>Price: {{ movie.price }}</p>
-<p>IMDb Rating: <a href = "{{ movie.imdb_link }}">{{ movie.imdb_rating }} ({{ movie.imdb_votes }})</a></p>
-<p><a href="https://www.youtube.com/results?search_query={{ movie.title }}+trailer">Trailer</a></p>
-<p>Genre: 
-    <br>
-    {% for genre in movie.genre.all %}
-    {% if not forloop.last %}
-         {{ genre }},
-      {% else %}
-         {{ genre }}
-      {% endif %}
-    {% endfor %}
-</p>
-<p>Plot summary: <br> {{ movie.plot_summary }}</p>
+<div class="movie-title-container">
+   <h1>{{ movie.title }} </h1>
+   <div class="year-released">
+      <p>{{ movie.year_released }} &#183; {{ movie.rating }} &#183; {{ movie.runtime }} min </p>
+   </div>
+</div>
+<div class="movie-poster">
+   <a href="https://www.youtube.com/results?search_query={{ movie.title }}+trailer">
+      <img src="{{ movie.poster_link }}">
+      <p>Watch the trailer</p>
+   </a>
+</div>
+<div class="movie-info-container">
+   <p class="card">IMDb Rating <a href = "{{ movie.imdb_link }}"><b>{{ movie.imdb_rating }}</b>/10 ({{ movie.imdb_votes }} votes)</a></p>
+   <p class="card">Genre 
+      <br>
+      {% for genre in movie.genre.all %}
+      {% if not forloop.last %}
+            {{ genre }} &#183;
+         {% else %}
+            {{ genre }}
+         {% endif %}
+      {% endfor %}
+   </p>
+   <p class="card">Plot summary <br> {{ movie.plot_summary }}</p>
 
-<p>Tagline: {{ movie.tagline }}</p>
+   <p class="card">Tagline <br> {{ movie.tagline }}</p>
 
-<p>Director: {{ movie.director.name }}</p>
-<p>
-    Cast:
-    <br>
-    {% for cast in movie.actor.all %}
-    {% if not forloop.last %}
-         {{ cast }},
-      {% else %}
-         {{ cast }}
-      {% endif %}
-    {% endfor %}
-</p>
-
+   <p class="card">Director <br> {{ movie.director.name }}</p>
+   <p class="card">
+      Cast
+      <br>
+      {% for cast in movie.actor.all %}
+      {% if not forloop.last %}
+            {{ cast }} &#183;
+         {% else %}
+            {{ cast }}
+         {% endif %}
+      {% endfor %}
+   </p>
+</div>
 {% endblock %}
