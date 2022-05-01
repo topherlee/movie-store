@@ -22,19 +22,23 @@ Movie List - Movie Store
                             <h3>{{ movie.title }}</h3>
                         </a>
                         <p>{{ movie.year_released }}</p>
-                        {% if movie.tagline %}
-                            <p>{{ movie.tagline }}</p>
-                        {% endif %}
-                        <p>
-                            {% for genre in movie.genre.all %}
-                            {% if not forloop.last %}
-                                {{ genre }},
-                            {% else %}
-                                {{ genre }}
+                        <div class="synopsis">
+                            {% if movie.tagline %}
+                                <p>{{ movie.tagline }}</p>
                             {% endif %}
-                            {% endfor %}
-                        </p>
-                        <p>{{ movie.imdb_rating }}/10 ({{ movie.imdb_votes }} votes)</p>
+                        </div>
+                        <div class="lower-back-card">
+                            <p>
+                                {% for genre in movie.genre.all %}
+                                {% if not forloop.last %}
+                                    {{ genre }},
+                                {% else %}
+                                    {{ genre }}
+                                {% endif %}
+                                {% endfor %}
+                                <br>
+                                {{ movie.imdb_rating }}/10 ({{ movie.imdb_votes }} votes)</p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -240,6 +240,21 @@ a:hover{
     color: white;
 }
 
+.flip-card-back .synopsis{
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+
+.flip-card-back .lower-back-card{
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    bottom: 0;
+}
+
 .page-movie{
     display: flex;
     flex-direction: row;
