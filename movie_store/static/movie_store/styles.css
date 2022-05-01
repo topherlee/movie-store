@@ -30,10 +30,6 @@ a:hover{
     color: white;
 }
 
-.wrapper{
-    margin: 0;
-}
-
 .body-top{
     background-color: #151414;
     word-spacing: 4px;
@@ -233,11 +229,22 @@ a:hover{
 }
 
 .footer {
-    position: fixed;
-    left: 0;
+    position: absolute;
     bottom: 0;
     width: 100%;
     background-color: #151414;
     color: white;
     text-align: center;
+    height: 2.5rem;
+}
+
+
+.page-container{
+    margin: 0;
+    position: relative;
+    min-height: 100vh;
+}
+
+.wrapper{
+    padding-bottom: 2.5rem;
 }
