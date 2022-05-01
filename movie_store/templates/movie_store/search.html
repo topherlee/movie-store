@@ -8,8 +8,11 @@ Search results for <b>"{{ query }}"</b> in {{ search }}:
 {% endif %}
 
 {% if page_obj %}
+    
 <div class="page-movie">
     {% for result in page_obj %}
+    
+
         {% if search == "title" %}
             <div class="movie-card">
                 <a href='{% url 'movie_details' id=result.id %}'>
@@ -42,10 +45,10 @@ Search results for <b>"{{ query }}"</b> in {{ search }}:
                     </div>
                     <span class="movie-title">{{ result.title|upper }}</span>
                 </a>
-            </div> 
+            </div>
         
         {% elif search == "director" or search == "artist" %}
-        <p>{{ result.name }}</p>
+            <p>{{ result.name }}</p>
         {% endif %}
     {% endfor %}
 </div>

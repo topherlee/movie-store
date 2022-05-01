@@ -48,7 +48,7 @@ def search(request):
     elif search == "title":
         results = Movie.objects.filter(title__iregex=fr"({query})")
 
-    paginator = Paginator(results, 25)
+    paginator = Paginator(results, 24)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {

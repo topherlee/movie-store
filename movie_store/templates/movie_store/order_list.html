@@ -3,7 +3,7 @@
 Order List - Movie Store
 {% endblock %}
 {% block content %}
-  <h1>Order List - Movie Store</h1>
+  <h1>Order List</h1>
   
   {% for order in orders %}
   <p>This is order <b> <a href="{% url 'order_details' id=order.id %}">{{order.id }}</a></b> for

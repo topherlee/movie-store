@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block content %}
-<h1>Movie Store</h1>
 <h1>{{ movie.title }} </h1>
 <p>{{ movie.year_released }} &#183; {{ movie.rating }} &#183; {{ movie.runtime }} min </p>
 <img src="{{ movie.poster_link }}">
 <p>Price: {{ movie.price }}</p>
 <p>IMDb Rating: <a href = "{{ movie.imdb_link }}">{{ movie.imdb_rating }} ({{ movie.imdb_votes }})</a></p>
+<p><a href="https://www.youtube.com/results?search_query={{ movie.title }}+trailer">Trailer</a></p>
 <p>Genre: 
     <br>
     {% for genre in movie.genre.all %}
