@@ -41,18 +41,11 @@ def movie_modify(request, id=None):
     else:
         form = MoviesForm(instance=movie)
     return render(request, 'movie_store/movie_edit.html', {'form':form})
-"""
-def movie_edit(request):
-    product = get_object_or_404(Movies, id=id)
-    if request.method=="POST":
-        form = MoviesForm(request.POST, instance=product)
-        if form.is_valid():
-            product = form.save(commit=False)
-            product.created_date = timezone.now()
-            product.save()
-            form.save_m2m()
-            return redirect('movie_details', id=product.id)
-    else:
-        form = MoviesForm(instance=product)
-    return render(request, 'movie_store/movie_edit.html', {'form':form})
-"""
+
+@login_required
+def movie_delete(request, id):
+    movie = get_object_or_404(Movie, id=id)
+    deleted = request.session.get('deleted','empty')
+    request.session['deleted'] = movie.title
+    movie.delete()
+    return redirect('movie_list')

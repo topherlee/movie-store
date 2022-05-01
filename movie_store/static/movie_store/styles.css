@@ -13,7 +13,6 @@ body{
     margin-left: 5%;
     margin-right: 5%;
     padding-left: 0px;
-    border: 2px solid white;
 }
 
 a:link {
@@ -46,7 +45,21 @@ a:hover{
 
 .body-top h1{
     margin-left: 5%;
+    color: #fff;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+  }
+  
+  @-webkit-keyframes glow {
+    from {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e69200, 0 0 40px #e69200, 0 0 50px #e69200, 0 0 60px #e69200, 0 0 70px #e69200;
+    }
+    to {
+      text-shadow: 0 0 20px #fff, 0 0 30px #fff64d, 0 0 40px #fff64d, 0 0 50px #fff64d, 0 0 60px #fff64d, 0 0 70px #fff64d, 0 0 80px #fff64d;
+    }
 }
+
 .second-header{
     display:flex;
     justify-content:space-between;
@@ -57,9 +70,13 @@ a:hover{
 }
 
 .nav{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
     background-color: #2f2b30;
     height: auto;
     margin-top: -15px;
+    z-index: 10;
 }
 
 .nav-buttons{
@@ -213,4 +230,14 @@ a:hover{
     margin-top: 10px;
     inline-size: 200px;
     overflow-wrap: break-word;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #151414;
+    color: white;
+    text-align: center;
 }
