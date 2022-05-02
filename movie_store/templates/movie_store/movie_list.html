@@ -5,7 +5,10 @@ Movie List - Movie Store
 {% endblock %}
 
 {% block content %}
-<h1>Movie List</h1>
+<div class="second-title-bar">
+    <h1>Movie List</h1>
+    <a href="{% url 'movie_details' id=randoms.id %}"><button class="random-button button">Pick a Random Movie for Me!</button></a>
+</div>
 <div class="page-movie">
     {% for movie in page_obj %}
     <div class="movie-card">
@@ -18,26 +21,30 @@ Movie List - Movie Store
                     <img src="{{ movie.poster_link }}">
 
                     <div class="container">
-                        <a href='{% url 'movie_details' id=movie.id %}'>
-                            <h3>{{ movie.title }}</h3>
-                        </a>
-                        <p>{{ movie.year_released }}</p>
-                        <div class="synopsis">
-                            {% if movie.tagline %}
-                                <p>{{ movie.tagline }}</p>
+                        <p class="upper-card">
+                            <a href='{% url 'movie_details' id=movie.id %}'>
+                                <h3>{{ movie.title }}</h3>
+                            </a>
+                            {{ movie.year_released }}
+                        </p>
+                        {{ movie.imdb_rating }}/10 ({{ movie.imdb_votes }} votes)
+                        <p>
+                            {% for genre in movie.genre.all %}
+                            {% if not forloop.last %}
+                                {{ genre }},
+                            {% else %}
+                                {{ genre }}
                             {% endif %}
-                        </div>
+                            {% endfor %}
+                            <br>
+                        </p>
                         <div class="lower-back-card">
-                            <p>
-                                {% for genre in movie.genre.all %}
-                                {% if not forloop.last %}
-                                    {{ genre }},
-                                {% else %}
-                                    {{ genre }}
-                                {% endif %}
-                                {% endfor %}
-                                <br>
-                                {{ movie.imdb_rating }}/10 ({{ movie.imdb_votes }} votes)</p>
+                            
+                            <form method="post" action="{% url 'basket_add' movie.id %}">
+                                {{ basket_movie_form }}
+                                {% csrf_token %}
+                                <br><button class="button3" type="submit">Add to Basket</button>
+                            </form>
                         </div>
                     </div>
                 </div>

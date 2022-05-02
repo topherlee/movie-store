@@ -19,7 +19,7 @@
    <form action="{% url 'basket_add' movie.id %}" method="post">
       {{ basket_movie_form }}
       {% csrf_token %}
-      <input type="submit" value="Add to Basket">
+      <br><button class="button2" type="submit">Add to Basket</button>
    </form>
    
 </div>
