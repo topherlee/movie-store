@@ -34,8 +34,6 @@
                     {% block navbar %}
                     <nav class="nav">
                         <ul class="nav-buttons">
-                            <li><a href="/movies">Movies</a></li>
-                            <li><a href="/basket_detail/">Cart</a></li>
                             <li class="dropdown">
                                 <a href="javascript:void(0)" class="dropbtn">Dashboard</a>
                                 <div class="dropdown-content">
@@ -47,6 +45,10 @@
                                     {% endif %}
                                 </div>
                             </li>
+                            <li><a href="/movies">Movies</a></li>
+                            <li><a href="/basket_detail/">
+                                Cart: {{ total_item }} {% if total_item < 2 %}item{% else %}items{% endif %} (${{ total_price }})
+                            </a></li>
                             {% if user.is_authenticated %}
                             <li style="float:right"><a href="/accounts/logout" >Logout ({{ user.get_username }})</a></li>
                             {% else %}
