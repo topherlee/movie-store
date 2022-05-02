@@ -2,10 +2,13 @@
     font-family: 'Segoe UI', Helvetica, Geneva, Verdana, sans-serif;
 }
 
+html{
+    min-height: 100%;
+}
+
 body{
     background-color:bisque;
     color: rgb(244, 240, 240);
-    padding: 0;
 }
 
 
@@ -13,17 +16,21 @@ body{
     margin: -10px;
     position: relative;
     min-height: 100vh;
+    border: 10px solid red;
+    display: flex;
 }
 
 .wrapper{
     padding-bottom: 2.5rem;
+    border: 10px solid green;
+    width: 100%;
 }
 
 .main-body{
     margin-top: 2%;
     margin-left: 5%;
     margin-right: 5%;
-    padding-left: 0px;
+    padding: 0 100px;
     color: black;
 }
 
@@ -216,7 +223,7 @@ a:hover{
 .button3 {
     background-color: #4CAF50;
     cursor: pointer;
-    width:90%;
+    width:70%;
     border-radius: 5px;
     border: 1px solid #4CAF50;
     padding: 8px;
@@ -352,7 +359,7 @@ a:hover{
     background-color: #151414;
     color: white;
     text-align: center;
-    height: 2.5rem;
+    height: 3.5rem;
 }
 
 .movie-title-container{
@@ -369,6 +376,19 @@ a:hover{
     font-size: medium;
 }
 
+.movie-row{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    width: 100%;
+}
+
+@media (max-width: 800px) {
+    .movie-row {
+      flex-direction: column;
+    }
+  }
+
 .movie-poster{
     text-align: center;
     width: fit-content;
@@ -376,7 +396,7 @@ a:hover{
 
 .movie-poster img{
     height: 402px;
-    width: 273px;
+    width: 275px;
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -385,10 +405,8 @@ a:hover{
 }
 
 .movie-info-container{
-    position: relative;
-    top: -545px;
-    left: 350px;
-    width: 60%;
+    display: inline-block;
+    width: 100%;
     font-size: large;
 }
 
@@ -397,6 +415,8 @@ a:hover{
 }
 
 .card{
+    position: relative;
+    top: -20px;
     background-color: rgb(255, 255, 255);
     color: #151414;
     padding: 10px;
@@ -482,4 +502,57 @@ a:hover{
 
 .banner li a{
     color: white;
+}
+
+.comment-section{
+    display: block;
+    position: relative;
+    margin-top: -20px;
+    padding: 0 5px;
+}
+
+.comment-section .comments{
+    display: block;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.comment-section .comment-box {
+    display: inline;
+    width: 500px;
+    height: 200px;
+}
+
+.recently-viewed{
+    display: inline-flex;
+    justify-content: left;
+    width: 100%;
+    padding-top: 60px;
+    overflow-x: scroll;
+}
+
+.recently-viewed::-webkit-scrollbar{
+    display: none;
+}
+
+.recently-viewed .small-poster{
+    margin: 0 20px;
+}
+
+
+.recently-viewed .small-title{
+    text-align: center;
+    word-wrap: break-word;
+    width: 150px;
+}
+
+.recently-viewed .recent-poster {
+    width: 150px;
+    height: 200px;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.recently-viewed .recent-poster:hover{
+    box-shadow: none;
 }

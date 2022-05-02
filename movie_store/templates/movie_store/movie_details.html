@@ -11,69 +11,114 @@
       <p>{{ movie.year_released }} &#183; {{ movie.rating }} &#183; {{ movie.runtime }} min </p>
    </div>
 </div>
-<div class="movie-poster">
-   <a href="https://www.youtube.com/results?search_query={{ movie.title }}+trailer">
-      <img src="{{ movie.poster_link }}">
-      <p>Watch the trailer</p>
-   </a>
-   <form action="{% url 'basket_add' movie.id %}" method="post">
-      {{ basket_movie_form }}
-      {% csrf_token %}
-      <br><button class="button2" type="submit">Add to Basket</button>
-   </form>
-   
-</div>
-<div class="movie-info-container">
-   <p class="card">IMDb Rating <a href = "{{ movie.imdb_link }}"><b>{{ movie.imdb_rating }}</b>/10 ({{ movie.imdb_votes }} votes)</a></p>
-   <p class="card">Genre 
-      <br>
-      {% for genre in movie.genre.all %}
-      {% if not forloop.last %}
-            {{ genre }} &#183;
-         {% else %}
-            {{ genre }}
-         {% endif %}
-      {% endfor %}
-   </p>
-   <p class="card">Plot summary <br> {{ movie.plot_summary }}</p>
+<div class="movie-row">
+   <div class="movie-poster">
+      <a href="https://www.youtube.com/results?search_query={{ movie.title }}+trailer">
+         <img src="{{ movie.poster_link }}">
+         <p><b>Watch the trailer</b></p>
+      </a>
+      <form action="{% url 'basket_add' movie.id %}" method="post">
+         {{ basket_movie_form }}
+         {% csrf_token %}
+         <br><button class="button2" type="submit">Add to Basket</button>
+      </form>
+      
+   </div>
+   <div class="movie-info-container">
+      <p class="card">IMDb Rating <a href = "{{ movie.imdb_link }}"><b>{{ movie.imdb_rating }}</b>/10 ({{ movie.imdb_votes }} votes)</a></p>
+      <p class="card">Genre 
+         <br>
+         {% for genre in movie.genre.all %}
+         {% if not forloop.last %}
+               {{ genre }} &#183;
+            {% else %}
+               {{ genre }}
+            {% endif %}
+         {% endfor %}
+      </p>
+      <p class="card">Plot summary <br> {{ movie.plot_summary }}</p>
 
-   <p class="card">Tagline <br> {{ movie.tagline }}</p>
+      <p class="card">Tagline <br> {{ movie.tagline }}</p>
 
-   <p class="card">Director <br> {{ movie.director.name }}</p>
-   <p class="card">
-      Cast
-      <br>
-      {% for cast in movie.actor.all %}
-      {% if not forloop.last %}
-            {{ cast }} &#183;
-         {% else %}
-            {{ cast }}
-         {% endif %}
-      {% endfor %}
-   </p>
+      <p class="card">Director <br> {{ movie.director.name }}</p>
+      <p class="card">
+         Cast
+         <br>
+         {% for cast in movie.actor.all %}
+         {% if not forloop.last %}
+               {{ cast }} &#183;
+            {% else %}
+               {{ cast }}
+            {% endif %}
+         {% endfor %}
+      </p>
+   </div>
 </div>
-<div class="comments">
-   {% for comment in comments %}
-   {{ comment.user }}
-   {{ comment.created_on }}
-   {{ comment.body | linebreaks}}
+{% if recently_viewed_movies %}
+<div class="recently-viewed">
+   <h3>Recently viewed titles:</h3>
+   {% for movie in recently_viewed_movies %}
+   <div class="small-poster">
+      <a href="{% url 'movie_details' id=movie.id%}">
+      <img src="{{ movie.poster_link }}" class="recent-poster">
+      <p class="small-title">{{ movie.title }}</p>
+      </a>
+   </div>
    {% endfor %}
 </div>
-<div class="col-md-8 card mb-4  mt-3 ">
-   <div class="card-body">
-     {% if new_comment %}
-     <div class="alert alert-success" role="alert">
-       Your comment is awaiting moderation
-     </div>
-     {% else %}
-     <h3>Leave a comment</h3>
-     <form method="post" style="margin-top: 1.3em;">
-      {{ comment_form.user }}
-      {{ comment_form.body }}
-      {% csrf_token %}
-      <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
-     </form>
-     {% endif %}
+{% endif %}
+
+<div class="comment-section">
+   <div class="comment-box ">
+      <div class="card-body">
+      {% if new_comment %}
+      <div class="alert alert-success" role="alert">
+         Your comment is awaiting moderation
+      </div>
+      {% else %}
+      <h3>Leave a comment</h3>
+      <form method="post" style="margin-top: 1.3em;">
+         {{ comment_form.user }}
+         <span>{{ comment_form.body }}</span>
+         {% csrf_token %}
+         <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+      </form>
+      {% endif %}
+      </div>
    </div>
- </div>
+   <div class="comments">
+      {% if comments %}
+         {% for comment in page_obj %}
+         <div class="card">
+            <b>{{ comment.user }}</b>
+            <br>
+            Posted on: {{ comment.created_on }}
+            {{ comment.body | linebreaks}}
+         </div>
+         <br>
+         {% endfor %}
+      {% else %}
+         <h3 align="center">Be the first to leave a comment!</h3>
+      {% endif %}
+   </div>
+   {% if page_obj %}
+   <div class="pagination">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <a href="?page=1">&laquo; First</a>
+              <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+          {% endif %}
+  
+          <span class="current">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+          </span>
+  
+          {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}">Next</a>
+              <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+          {% endif %}
+      </span>
+  </div>
+  {% endif %}
+</div>
 {% endblock %}
