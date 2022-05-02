@@ -17,4 +17,6 @@ urlpatterns = [
     path('basket_add/<int:movie_id>/', views.basket.basket_add, name ='basket_add'),
     path('basket_remove/<int:movie_id>/', views.basket.basket_remove, name ='basket_remove'),
     path('basket_detail/', views.basket.basket_detail, name ='basket_detail'),
+    path('purchase/', views.purchase, name ='purchase'),
+    path('payment/', views.payment, name ='payment'),
 ]

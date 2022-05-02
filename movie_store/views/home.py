@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.core.paginator import Paginator
-from ..models import Movie,Director,Actor
+from ..models import Movie,Director,Actor,Customer,Order,Cart,LineItem
+from .basket import Basket
 from ..forms import SignUpForm
 
 def home(request):
@@ -26,6 +27,31 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+
+def payment(request):
+    basket = Basket(request)
+    user = request.user
+    customer = get_object_or_404(Customer, user_id=user.id)
+    order = Order.objects.create(customer=customer)
+    order.refresh_from_db()
+    for item in basket:
+        product_item = get_object_or_404(Movie, id=item['movie_id'])
+        cart = Cart.objects.create(product = product_item, quantity=item['quantity'])
+        cart.refresh_from_db()
+        line_item = LineItem.objects.create(quantity=item['quantity'], product=product_item, cart=cart,  order = order)
+
+    basket.clear()
+    request.session['deleted'] = 'thanks for your purchase'
+    return redirect('movie_list' )
+
+def purchase(request):
+    if request.user.is_authenticated:
+       user = request.user
+       basket = Basket(request)
+       return render(request, 'movie_store/purchase.html', {'basket': basket, 'user': user})
+    else:
+        return redirect('login')
 
 def search(request):
     if 'query' in request.session:
