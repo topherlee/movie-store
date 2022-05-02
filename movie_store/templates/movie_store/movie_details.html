@@ -52,4 +52,28 @@
       {% endfor %}
    </p>
 </div>
+<div class="comments">
+   {% for comment in comments %}
+   {{ comment.user }}
+   {{ comment.created_on }}
+   {{ comment.body | linebreaks}}
+   {% endfor %}
+</div>
+<div class="col-md-8 card mb-4  mt-3 ">
+   <div class="card-body">
+     {% if new_comment %}
+     <div class="alert alert-success" role="alert">
+       Your comment is awaiting moderation
+     </div>
+     {% else %}
+     <h3>Leave a comment</h3>
+     <form method="post" style="margin-top: 1.3em;">
+      {{ comment_form.user }}
+      {{ comment_form.body }}
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+     </form>
+     {% endif %}
+   </div>
+ </div>
 {% endblock %}

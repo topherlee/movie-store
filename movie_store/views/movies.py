@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
-from ..models import Movie
-from ..forms import BasketAddProductForm, MoviesForm
+from ..models import Movie, Comment
+from ..forms import BasketAddProductForm, CommentForm, MoviesForm
 from django.utils import timezone
 import random
  
@@ -27,9 +27,24 @@ def movie_list(request):
 def movie_details(request, id):
     movie = get_object_or_404(Movie, id=id)
     basket_movie_form = BasketAddProductForm()
+    comments = Comment.objects.filter(movie__id=id)
+
+    if request.method == "POST":
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.user = request.user
+            new_comment.movie = movie
+            new_comment.save()
+            return redirect("movie_details", id=movie.id)
+    else:
+        comment_form = CommentForm()
+
     context = {
         'movie':movie,
         'basket_movie_form':basket_movie_form,
+        'comments':comments,
+        'comment_form':comment_form,
     }
     return render(request, 'movie_store/movie_details.html', context)
 

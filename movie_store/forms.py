@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Movie
+from .models import Movie, Comment
 
 class SignUpForm(UserCreationForm):
     username = forms.CharField(max_length=30)
@@ -33,3 +33,10 @@ class BasketAddProductForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(BasketAddProductForm, self).__init__(*args, **kwargs)
         self.fields['quantity'].label = "Qty:"
+
+class CommentForm(forms.ModelForm):
+
+
+    class Meta:
+        model = Comment
+        fields = ('body',)

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from movie_store.models import Actor, Director, Genre, Movie, Customer
+from movie_store.models import Actor, Director, Genre, Movie, Customer, Comment
 
 # Register your models here.
 class ArtistInline(admin.TabularInline):
@@ -23,4 +23,5 @@ class MoviesAdmin(admin.ModelAdmin):
 admin.site.register(Movie, MoviesAdmin)
 #admin.site.register(Movies)
 admin.site.register(Customer)
+admin.site.register(Comment)
 
