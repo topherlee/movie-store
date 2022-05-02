@@ -5,17 +5,16 @@ Login - Movie Store
 {% block content %}
     <h1>Login</h1>
     {% if form.errors %}
-       <p>Your username and password didn't match. Please try again.</p>
+       <p style="color:red">Your username and password does not match. Please try again.</p>
     {% endif %}
     {% if next %}
     {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-      please login with an account that has access.</p>
+    <p style="color:red">Your account does not have access to this page. Please login with an account that has access to proceed.</p>
     {% else %}
      
     {% endif %}
   {% endif %}
-  <p>Please login, or <a href = "{% url 'signup' %}">Register</a> to see this page.</p>
+  <p>New customer? <a href = "{% url 'signup' %}" style="color:cornflowerblue">Register here</a>.</p>
   <form method="POST" action="{% url 'login' %}"> 
     {% csrf_token %}
     <p>

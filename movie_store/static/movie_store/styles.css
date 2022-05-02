@@ -16,13 +16,11 @@ body{
     margin: -10px;
     position: relative;
     min-height: 100vh;
-    border: 10px solid red;
     display: flex;
 }
 
 .wrapper{
     padding-bottom: 2.5rem;
-    border: 10px solid green;
     width: 100%;
 }
 
@@ -101,9 +99,10 @@ a:hover{
 
 .nav-buttons{
     list-style-type: none;
-    margin-left: 3%;
+    margin-left: 5%;
     overflow: hidden;
     padding: 5px 0px;
+    margin-right: 5%;
 }
 
 .nav-buttons li{
@@ -120,8 +119,53 @@ a:hover{
     word-spacing: normal;
 }
 
+.nav-buttons li a:active{
+    background-color: #04AA6D;
+    color: white;
+}
+
+.nav-buttons li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 15px 16px;
+    text-decoration: none;
+  }
+
+  
+.nav-buttons  li.dropdown {
+    display: inline-block;
+  }
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #2f2b30;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 20px 20px;
+    text-decoration: none;
+    display: block;
+}
+  
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: rgb(255, 170, 0);}
+
+
 .nav-buttons li a:hover{
-    background-color: black;
+    background-color: rgb(255, 170, 0);
     color:white;
 }
 
@@ -239,7 +283,7 @@ a:hover{
     display: grid;
     justify-content: space-evenly;
     padding: 3%;
-    margin-left: -40px;
+    margin-left: -20px;
 }
 
 .flip-card {

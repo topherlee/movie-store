@@ -1,0 +1,14 @@
+{% extends 'movie_store/layout.html' %}
+
+{% block title %}
+Customer List - Movie Store
+{% endblock %}
+
+{% block content %}
+<h1>Customer List</h1>
+{% for customer in page_obj %}
+{% with users=customer.user %}
+<p><a href="{% url 'customer_details' id=users.id %}">{{ users.first_name }} {{ users.last_name }}, {{ users.email }}</p>
+{% endwith %}
+{% endfor %}
+{% endblock %}

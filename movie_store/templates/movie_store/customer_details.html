@@ -1,0 +1,31 @@
+{% extends 'movie_store/layout.html' %}
+
+{% block title %}
+Customer Details - Movie Store
+{% endblock %}
+
+{% block content %}
+{% with users=customer.user %}
+<h1>{{ users.first_name }} {{ users.last_name }}</h1>
+<p><b>Registered email:</b><br>{{ users.email }}</p>
+<p>
+    <b>Shipping address: <br></b>{{ customer.address }}
+    <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?q={{ customer.address }}&key=AIzaSyBfIreV_7IiQbwrZ2WOUNm0Tqk4xbN-9lY"></iframe>
+</p>
+<h3>Orders:</h3>
+{% if orders %}
+    {% for order in orders %}
+        {% if request.user.username == users.username %}
+        <p>Your <b><a href="{% url 'order_details' id=order.id %}" style="color: cornflowerblue;">#{{ forloop.counter }}</a></b> order was placed on: {{ order.created_date }} 
+        </p>
+        {% else %}
+        <p>This is order <b><a href="{% url 'order_details' id=order.id %}">{{ order.id }}</a></b> for
+            {{order.customer.user.first_name}} {{order.customer.user.last_name}}. The order was placed on: {{ order.created_date }} 
+        </p>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <h3 style="text-align: center;">No orders placed yet.</h3>
+{% endif %}
+{% endwith %}
+{% endblock %}

@@ -10,6 +10,11 @@
    <div class="year-released">
       <p>{{ movie.year_released }} &#183; {{ movie.rating }} &#183; {{ movie.runtime }} min </p>
    </div>
+   {% if user.is_staff %}
+      <a href="{% url 'edit_movie' id=movie.id %}">
+         <button class="button2" style="background-color: red;border: 1px solid red;float: right;">Modify movie</button>
+      </a>
+   {% endif %}
 </div>
 <div class="movie-row">
    <div class="movie-poster">
@@ -22,7 +27,6 @@
          {% csrf_token %}
          <br><button class="button2" type="submit">Add to Basket</button>
       </form>
-      
    </div>
    <div class="movie-info-container">
       <p class="card">IMDb Rating <a href = "{{ movie.imdb_link }}"><b>{{ movie.imdb_rating }}</b>/10 ({{ movie.imdb_votes }} votes)</a></p>
@@ -59,7 +63,7 @@
    <h3>Recently viewed titles:</h3>
    {% for movie in recently_viewed_movies %}
    <div class="small-poster">
-      <a href="{% url 'movie_details' id=movie.id%}">
+      <a href="{% url 'movie_details' id=movie.id %}">
       <img src="{{ movie.poster_link }}" class="recent-poster">
       <p class="small-title">{{ movie.title }}</p>
       </a>
@@ -76,7 +80,7 @@
          Your comment is awaiting moderation
       </div>
       {% else %}
-      <h3>Leave a comment</h3>
+      <h3>Leave a review</h3>
       <form method="post" style="margin-top: 1.3em;">
          {{ comment_form.user }}
          <span>{{ comment_form.body }}</span>
@@ -98,7 +102,7 @@
          <br>
          {% endfor %}
       {% else %}
-         <h3 align="center">Be the first to leave a comment!</h3>
+         <h3 align="center">Be the first to leave a review!</h3>
       {% endif %}
    </div>
    {% if page_obj %}
