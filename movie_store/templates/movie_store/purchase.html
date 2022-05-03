@@ -1,15 +1,16 @@
 {% extends 'movie_store/layout.html' %}
 {% block content %}
-    <h1>Acme Shopping: Your Order</h1>
+    <h1>Your Order</h1>
     
 <h2>You have these in your basket:</h2>
   {% for item in basket %}
-    {% with product=item.product %}
+    {% with product=item.movie %}
  
-<p>You put {{product.quantity }} of our <b> {{ product.name }} </b> which each cost {{ item.price }} and cost {{ item.total_price }} for in your basket.</p>
+<p>{{ forloop.counter }}:<b> {{ product.title }} </b>{{ item.quantity }} x
+    ${{ item.price }}/unit = ${{ item.total_price }}.</p>
      {% endwith %}
    {% endfor %}
- <p>The total for all of this fun is: {{ basket.get_total_price }} </p>
+ <h1><b>Total ({{ total_item }}) {% if total_item < 2 %}item{% else %}items{% endif %}: ${{ basket.get_total_price }}</b></h1>
    <p>
     <form action="/payment/" method="post">
        {% csrf_token %}
@@ -18,7 +19,7 @@
        <input type='text' name='last_name' value="{{user.last_name}}" disabled><br>
        <label for 'payment'>Card Type:</label><input type='text' size=5 name='payment'>
        <input type="number" name="total" value="Total Payment:">
-       <input type="submit" value="Payment">
+       <input type="submit" value="Pay Now">
        </form>
        </p>
  {% endblock %}

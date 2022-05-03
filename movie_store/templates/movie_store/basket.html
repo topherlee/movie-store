@@ -3,6 +3,7 @@
 {% block title %}
 Your Basket - Movie Store
 {% endblock %}
+
 {% block content %}
 <div class="basket-page">
     <h1>Your Basket:</h1>
@@ -11,9 +12,10 @@ Your Basket - Movie Store
         <li><a href="{% url 'movie_list' %}">
         Continue shopping
         </a></li>
+        {% if total_item > 0 %}
         <li><a href="{% url 'purchase' %}">Checkout</a></li>
+        {% endif %}
       </ul>
-      
     
       <h2>
         Subtotal {{ total }} ({% if item.quantity == 1 %}item{% else %}items{% endif %}):
@@ -38,11 +40,9 @@ Your Basket - Movie Store
           <input type="submit" value="Remove">
           {% csrf_token %}
         </form>
-              
               <span class="price">${{ item.price }}</span>
               <span class="subtotal">Subtotal ({{ item.quantity }} {% if item.quantity == 1 %}item{% else %}items{% endif %}): <b>${{ item.total_price }}</b></span>
       </div>
-  
         {% endwith %}
       {% endfor %}
   </div>

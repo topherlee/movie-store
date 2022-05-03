@@ -7,18 +7,15 @@
 {% block content %}
 <div class="movie-title-container">
    <h1>{{ movie.title }} </h1>
+   
    <div class="year-released">
       <p>{{ movie.year_released }} &#183; {{ movie.rating }} &#183; {{ movie.runtime }} min </p>
    </div>
-   {% if user.is_staff %}
-      <a href="{% url 'edit_movie' id=movie.id %}">
-         <button class="button2" style="background-color: red;border: 1px solid red;float: right;">Modify movie</button>
-      </a>
-   {% endif %}
+   
 </div>
 <div class="movie-row">
    <div class="movie-poster">
-      <a href="https://www.youtube.com/results?search_query={{ movie.title }}+trailer">
+      <a href="https://www.youtube.com/results?search_query={{ movie.title }}+{{ movie.year_released }}+trailer" target="_blank">
          <img src="{{ movie.poster_link }}">
          <p><b>Watch the trailer</b></p>
       </a>
@@ -27,9 +24,17 @@
          {% csrf_token %}
          <br><button class="button2" type="submit">Add to Basket</button>
       </form>
+      {% if user.is_staff %}
+      <a href="{% url 'edit_movie' id=movie.id %}">
+         <button class="button3" style="background-color: orange;">Edit Movie</button>
+      </a>
+      <a href="{% url 'delete_movie' id=movie.id %}">
+         <button class="button3">Delete Movie</button>
+      </a>
+   {% endif %}
    </div>
    <div class="movie-info-container">
-      <p class="card">IMDb Rating <a href = "{{ movie.imdb_link }}"><b>{{ movie.imdb_rating }}</b>/10 ({{ movie.imdb_votes }} votes)</a></p>
+      <p class="card">IMDb Rating <a href = "{{ movie.imdb_link }}" target="_blank"><b>{{ movie.imdb_rating }}</b>/10 ({{ movie.imdb_votes }} votes)</a></p>
       <p class="card">Genre 
          <br>
          {% for genre in movie.genre.all %}
@@ -73,23 +78,25 @@
 {% endif %}
 
 <div class="comment-section">
-   <div class="comment-box ">
-      <div class="card-body">
-      {% if new_comment %}
-      <div class="alert alert-success" role="alert">
-         Your comment is awaiting moderation
+   {% if user.is_authenticated %}
+      <div class="comment-box ">
+         <div class="card-body">
+         {% if new_comment %}
+         <div class="alert alert-success" role="alert">
+            Your comment is awaiting moderation
+         </div>
+         {% else %}
+         <h3>Leave a review</h3>
+         <form method="post" style="margin-top: 1.3em;">
+            {{ comment_form.user }}
+            <span>{{ comment_form.body }}</span>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+         </form>
+         {% endif %}
+         </div>
       </div>
-      {% else %}
-      <h3>Leave a review</h3>
-      <form method="post" style="margin-top: 1.3em;">
-         {{ comment_form.user }}
-         <span>{{ comment_form.body }}</span>
-         {% csrf_token %}
-         <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
-      </form>
-      {% endif %}
-      </div>
-   </div>
+   {% endif %}
    <div class="comments">
       {% if comments %}
          {% for comment in page_obj %}

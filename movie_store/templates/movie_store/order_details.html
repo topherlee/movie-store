@@ -14,7 +14,7 @@ Order Details - Movie Store
   <p>The order includes these items:</p>
   {% for line_item in line_items %}
   <p>
-    Title: <a href="{% url 'movie_details' id=line_item.product.id %}">{{ line_item.product.title }}</a>, Quantity: {{ line_item.quantity}}
+    Title: <a href="{% url 'movie_details' id=line_item.product.id %}"><b>{{ line_item.product.title }}</b></a>, Quantity: {{ line_item.quantity}}
   </p>
   
   {% endfor %}

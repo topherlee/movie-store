@@ -157,17 +157,21 @@ a:hover{
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #ddd;}
 
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
-
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: rgb(255, 170, 0);}
 
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display:flex;
+    flex-direction: column;
+}
 
 .nav-buttons li a:hover{
     background-color: rgb(255, 170, 0);
     color:white;
 }
+
+
 
 #nav-span{
     word-spacing: 2px;
@@ -176,13 +180,14 @@ a:hover{
 .page-title{
     color: white;
     padding-top: 10px;
-    margin: 0 1%;
+    margin: 0 -10px;
 }
 
 .page-title-meta{
     color: white;
-    margin: 0.2px 1%;
+    margin: 0.2px 2%;
     word-spacing: normal;
+    width: 100%;
 }
 
 .search-container{
@@ -255,7 +260,6 @@ a:hover{
     padding: 10px 100px;
     margin-top: 15px;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-
 }
 
 .button2:hover {
@@ -408,15 +412,15 @@ a:hover{
 
 .movie-title-container{
     font-size: x-large;
-    padding: 0;
+    display: grid;
 }
 
 .movie-title-container h1{
     font-weight: 200;
+    margin: -1% 0;
 }
 
 .year-released {
-    margin-top: -25px;
     font-size: medium;
 }
 
@@ -443,6 +447,16 @@ a:hover{
     width: 275px;
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+
+.movie-poster .button3{
+    background-color: red;
+    border: 1px solid red;
+    width: 100%;
+    margin: 5px 0;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 
 .movie-poster a{
     color: cornflowerblue;
@@ -551,7 +565,7 @@ a:hover{
 .comment-section{
     display: block;
     position: relative;
-    margin-top: -20px;
+    margin-top: 20px;
     padding: 0 5px;
 }
 

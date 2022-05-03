@@ -8,7 +8,7 @@ def order_list(request):
     orders = Order.objects.all()
     return render(request, 'movie_store/order_list.html', {'orders':orders})
 
-@user_passes_test(lambda u: u.is_staff)
+@login_required
 def order_details(request, id):
     order = get_object_or_404(Order, id=id)
     customer = order.customer
