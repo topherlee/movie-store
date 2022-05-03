@@ -30,20 +30,27 @@ def signup(request):
 
 
 def payment(request):
-    basket = Basket(request)
-    user = request.user
-    customer = get_object_or_404(Customer, user_id=user.id)
-    order = Order.objects.create(customer=customer)
-    order.refresh_from_db()
-    for item in basket:
-        product_item = get_object_or_404(Movie, id=item['movie_id'])
-        cart = Cart.objects.create(product = product_item, quantity=item['quantity'])
-        cart.refresh_from_db()
-        line_item = LineItem.objects.create(quantity=item['quantity'], product=product_item, cart=cart,  order = order)
-
-    basket.clear()
-    request.session['deleted'] = 'thanks for your purchase'
-    return redirect('movie_list' )
+    if request.user.is_authenticated:
+        basket = Basket(request)
+        if len(basket) > 0:
+            user = request.user
+            customer = get_object_or_404(Customer, user_id=user.id)
+            order = Order.objects.create(customer=customer)
+            order.refresh_from_db()
+            for item in basket:
+                product_item = get_object_or_404(Movie, id=item['movie_id'])
+                cart = Cart.objects.create(product = product_item, quantity=item['quantity'])
+                cart.refresh_from_db()
+                line_item = LineItem.objects.create(quantity=item['quantity'], product=product_item, cart=cart,  order = order)
+            
+            latest_order = Order.objects.latest('created_date')
+            basket.clear()
+            request.session['deleted'] = 'thanks for your purchase'
+            return redirect('order_details', id=latest_order.id)
+        else:
+            return redirect('purchase')
+    else:
+        return redirect('login')
 
 def purchase(request):
     if request.user.is_authenticated:

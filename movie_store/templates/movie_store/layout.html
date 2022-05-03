@@ -23,8 +23,7 @@
                                     <br>Filter by:
                                     <input type="radio" name="search" value="title" checked>Title
                                     <input type="radio" name="search" value="artist">Artist
-                                    <input type="radio" name="search" value="director">Director
-                                    
+                                    <input type="radio" name="search" value="director">Director 
                                     <br>
                                 </form>
                             </div>
@@ -39,7 +38,7 @@
                                 <a href="javascript:void(0)" class="dropbtn">Dashboard</a>
                                 <div class="dropdown-content">
                                     {% if user.is_authenticated %}
-                                    <a href="/my_details/">{{ user.username }}'s Profile</a>
+                                    <a href="/my_details/">{{ user.username }}'s Orders</a>
                                     {% else %}
                                     <a href="/my_details/">My Profile</a>
                                     {% endif %}

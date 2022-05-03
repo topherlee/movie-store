@@ -512,14 +512,14 @@ a:hover{
 .movie-item .update-price{
     position: absolute;
     top: 200px;
-    left: 240px;
+    left: 220px;
 }
 
 .movie-item .remove-item{
     position: absolute;
     margin-left: 10px;
     top: 200px;
-    left: 370px;
+    left: 350px;
 }
 
 .movie-item .price{

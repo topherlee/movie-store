@@ -37,7 +37,7 @@ Your Basket - Movie Store
           {% csrf_token %}
         </form>        
         <form class="remove-item" action="{% url 'basket_remove' movie.id %}" method="post">
-          <input type="submit" value="Remove">
+          <input type="submit" value="Remove from Cart">
           {% csrf_token %}
         </form>
               <span class="price">${{ item.price }}</span>

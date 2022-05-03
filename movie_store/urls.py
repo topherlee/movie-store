@@ -14,6 +14,7 @@ urlpatterns = [
     path('order_details/<id>/', views.order_details, name='order_details'),
     path('customers/', views.customer_list, name='customer_list'),
     path('customer_details/<id>/', views.customer_details, name='customer_details'),
+    path('customer_modify/<id>/' ,views.customer_modify ,name='customer_modify'),
     path('my_details/', views.customer_own_detail, name='my_details'),
     path('search/', views.search, name='search'),
     path('signup/', views.signup, name='signup'),
