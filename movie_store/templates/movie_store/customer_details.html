@@ -6,10 +6,13 @@ Customer Details - Movie Store
 
 {% block content %}
 {% with users=customer.user %}
-<h1>{{ users.first_name }} {{ users.last_name }}</h1>
+<h1>{{ users.first_name }} {{ users.last_name }} ({{ users }})</h1>
+{% if users == request.user %}
+<a href="{% url 'customer_modify' %}" style="color: cornflowerblue;">Edit Information</a>
+{% endif %}
 <p><b>Registered email:</b><br>{{ users.email }}</p>
 <p>
-    <b>Shipping address: <br></b>{{ customer.address }}. <a href="{% url 'customer_modify' id=user.id %}" style="color: cornflowerblue;">Edit Address</a>
+    <b>Shipping address: <br></b>{{ customer.address }}.
 </p>
 <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?q={{ customer.address }}&key=AIzaSyBfIreV_7IiQbwrZ2WOUNm0Tqk4xbN-9lY"></iframe>
 

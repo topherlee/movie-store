@@ -8,6 +8,20 @@ Movie List - Movie Store
 <div class="second-title-bar">
     <h1>Movie List</h1>
     <a href="{% url 'movie_details' id=randoms.id %}"><button class="random-button button">Pick a Random Movie for Me!</button></a>
+    <form method="post" action="{% url 'movie_list' %}">
+        {% csrf_token %}
+        <label for="sort">Sort Movies by:</label>
+        <select name="sort" id="sort">
+            <option value="title">Title (A-Z)</option>
+            <option value="-title">Title (Z-A)</option>
+            <option value="-year_released">Release Year (Descending)</option>
+            <option value="year_released">Release Year (Ascending)</option>
+            <option value="-imdb_rating">IMDb Rating (Decending)</option>
+            <option value="imdb_rating">IMDb Rating (Ascending)</option>
+        </select>
+        <button type="submit">Go</button>
+        <br><br>Currently Showing Movies Sorted by {{ sort }}
+    </form>
 </div>
 <div class="page-movie">
     {% for movie in page_obj %}

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from ..models import Customer, Order, LineItem
 from django.contrib.auth.decorators import login_required, user_passes_test
-from ..forms import CustomerForm
+from ..forms import CustomerForm, UserForm
 
 @user_passes_test(lambda u: u.is_staff)
 def customer_list(request):
@@ -40,15 +40,16 @@ def customer_own_detail(request):
     return render(request, 'movie_store/customer_details.html', context)
 
 @login_required
-def customer_modify(request, id):
-    customer = get_object_or_404(Customer, user_id=id)
+def customer_modify(request):
+    #customer = get_object_or_404(Customer,user_id=request.user.id)
     if request.method == "POST":
-        form = CustomerForm(request.POST, instance=customer)
-        if form.is_valid():
-            edited_cust = form.save(commit=False)
-            edited_cust.user = request.user
-            edited_cust.save()
-            return redirect('customer_details', id=edited_cust.user_id)
+        user_form = UserForm(request.POST, instance=request.user)
+        customer_form = CustomerForm(request.POST, instance=request.user.customer)
+        if user_form.is_valid() and customer_form.is_valid():
+            customer_form.save()
+            user_form.save()
+            return redirect('my_details')
     else:
-        form = CustomerForm(instance=customer)
-    return render(request, 'movie_store/customer_modify.html', {'form':form,'customer':customer})
+        customer_form = CustomerForm(instance=request.user.customer)
+        user_form = UserForm(instance=request.user)
+    return render(request, 'movie_store/customer_modify.html', {'user_form':user_form,'customer_form':customer_form})

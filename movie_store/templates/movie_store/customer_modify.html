@@ -3,16 +3,12 @@
 Modify Customer Details - Movie Store
 {% endblock %}
 {% block content %}
-{% if customer.user == request.user %}
-<h1>Edit Details for {{ customer.user.first_name }} {{ customer.user.last_name }}</h1>
+<h1>Edit Information for {{ request.user.first_name }} {{ request.user.last_name }}</h1>
 <form method="POST">
     {% csrf_token %}
-    <label for="{{ form.address.id_for_label }}">Shipping Address:</label>
-    {{ form.address }}
-    <button type="submit">Update Address</button>
+    {{ user_form.as_p }}
+    {{ customer_form.as_p }}
+    <button type="submit">Save Changes</button>
 </form>
-    
-{% else %}
-<h1>You are not authorized to edit this customer.</h1>
-{% endif %}
+
 {% endblock %}

@@ -9,19 +9,54 @@ from django.utils import timezone
 import random
  
 def movie_list(request):
-    movies = Movie.objects.all()
+    sort_by = None
+    basket_movie_form = BasketAddProductForm()
+
+    if "sort" in request.session:
+        sort_by = request.session["sort"]
+    else:
+        request.session["sort"] = None
+    request.session.modified = True
+    
+    if request.method=="POST":
+        sort_by = request.POST.get("sort")
+        request.session["sort"] = sort_by
+    
+    if sort_by == None:
+        movies = Movie.objects.all().order_by("title")
+    else:
+        movies = Movie.objects.all().order_by(f"{sort_by}")
+    
+    if sort_by == "title":
+        sort = "Title (A-Z)"
+    elif sort_by == "-title":
+        sort = "Title (Z-A)"
+    elif sort_by == "year_released":
+        sort = "Release Year (Ascending)"
+    elif sort_by == "-year_released":
+        sort = "Release Year (Descending)"
+    elif sort_by == "-imdb_rating":
+        sort = "IMDb Rating (Descending)"
+    elif sort_by == "imdb_rating":
+        sort = "IMDb Rating (Ascending)"
+    else:
+        sort = "Title (A-Z)"
+    
     paginator = Paginator(movies, 25)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    basket_movie_form = BasketAddProductForm()
+    
+   
     #choose random movie button
     ids = Movie.objects.count()
     first = Movie.objects.first().id
     randoms = Movie.objects.get(id=random.randint(first,ids))
+   
     context = {
         'page_obj':page_obj,
         'randoms':randoms,
         'basket_movie_form':basket_movie_form,
+        'sort':sort,
     }
     return render(request, 'movie_store/movie_list.html', context)
 
