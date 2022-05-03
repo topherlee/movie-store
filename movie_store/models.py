@@ -14,32 +14,14 @@ class Director(models.Model):
     def __str__(self):
         return str(self.name)
 
-class Actor(models.Model):
-    name = models.CharField(unique=True, max_length=200)
-
-    class Meta:
-        ordering = ['name']
-
-    def __str__(self):
-        return str(self.name)
-
-class Genre(models.Model):
-    genre = models.CharField(unique=True, max_length=200)
-
-    class Meta:
-        ordering = ['genre']
-
-    def __str__(self):
-        return str(self.genre)
-
 class Movie(models.Model):
     title = models.CharField(max_length=1000)   
     year_released = models.IntegerField(validators=[MaxValueValidator(2030),MinValueValidator(1800)])
     imdb_rating = models.DecimalField(decimal_places=1, max_digits=3, null=True, blank=True)
     imdb_votes = models.CharField(max_length=100, blank=True)
     director = models.ForeignKey(Director, on_delete=models.CASCADE)
-    actor = models.ManyToManyField(Actor)
-    genre = models.ManyToManyField(Genre)
+    actor = models.CharField(max_length=1000, blank=True)
+    genre = models.CharField(max_length=500, blank=True)
     metascore = models.IntegerField(null=True, blank=True, validators=[MaxValueValidator(100),MinValueValidator(0)])
     runtime = models.IntegerField(blank=True, null=True)
     rating = models.CharField(blank=True, null=True, max_length=50)

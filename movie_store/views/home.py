@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.core.paginator import Paginator
-from ..models import Movie,Director,Actor,Customer,Order,Cart,LineItem
+from ..models import Movie,Director,Customer,Order,Cart,LineItem
 from .basket import Basket
 from ..forms import SignUpForm
 
@@ -76,10 +76,10 @@ def search(request):
 
     if search == "director":
         results = Director.objects.filter(name__iregex=fr"{query}")    #director__name__contains=f'{query}')
-    elif search == "artist":
-        results = Actor.objects.filter(name__iregex=fr"{query}")
     elif search == "title":
         results = Movie.objects.filter(title__iregex=fr"({query})")
+    elif search == "genre":
+        results = Movie.objects.filter(genre__iregex=fr"({query})")
 
     paginator = Paginator(results, 24)
     page_number = request.GET.get('page')

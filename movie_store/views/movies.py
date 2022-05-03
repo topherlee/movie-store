@@ -2,11 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
-from numpy import append
-from ..models import Movie, Comment
+from ..models import Director, Movie, Comment
 from ..forms import BasketAddProductForm, CommentForm, MoviesForm
 from django.utils import timezone
 import random
+
+def movie_from_director(request,id):
+    movies = Movie.objects.filter(director_id=id)
+    director = Director.objects.get(id=id)
+    return render(request, 'movie_store/movie_from_director.html', {'movies':movies,'director':director,})
  
 def movie_list(request):
     sort_by = None
@@ -50,7 +54,8 @@ def movie_list(request):
     #choose random movie button
     ids = Movie.objects.count()
     first = Movie.objects.first().id
-    randoms = Movie.objects.get(id=random.randint(first,ids))
+    last = Movie.objects.last().id
+    randoms = Movie.objects.get(id=random.randint(first,last))
    
     context = {
         'page_obj':page_obj,

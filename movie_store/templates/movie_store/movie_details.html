@@ -37,13 +37,7 @@
       <p class="card">IMDb Rating <a href = "{{ movie.imdb_link }}" target="_blank"><b>{{ movie.imdb_rating }}</b>/10 ({{ movie.imdb_votes }} votes)</a></p>
       <p class="card">Genre 
          <br>
-         {% for genre in movie.genre.all %}
-         {% if not forloop.last %}
-               {{ genre }} &#183;
-            {% else %}
-               {{ genre }}
-            {% endif %}
-         {% endfor %}
+         {{ movie.genre }}
       </p>
       <p class="card">Plot summary <br> {{ movie.plot_summary }}</p>
 
@@ -53,13 +47,7 @@
       <p class="card">
          Cast
          <br>
-         {% for cast in movie.actor.all %}
-         {% if not forloop.last %}
-               {{ cast }} &#183;
-            {% else %}
-               {{ cast }}
-            {% endif %}
-         {% endfor %}
+         {{ movie.actor }}
       </p>
    </div>
 </div>

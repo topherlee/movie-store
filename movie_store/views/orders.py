@@ -5,7 +5,7 @@ from ..models import LineItem, Order
 
 @user_passes_test(lambda u: u.is_staff)
 def order_list(request):
-    orders = Order.objects.all()
+    orders = Order.objects.all().order_by("-created_date")
     return render(request, 'movie_store/order_list.html', {'orders':orders})
 
 @login_required

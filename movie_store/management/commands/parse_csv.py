@@ -8,7 +8,8 @@ from django.core.management.base import BaseCommand
 from django.db import IntegrityError
 from django.contrib.auth.models import User
 from faker import Faker
-from movie_store.models import Director,Actor,Genre,Movie,Cart,Customer,LineItem,Order
+from movie_store.models import Director,Movie,Cart,Customer,LineItem,Order
+import ast
 
 class Command(BaseCommand):
     help = 'Load data from csv along with faker values into tables'
@@ -21,56 +22,53 @@ class Command(BaseCommand):
         Customer.objects.all().delete()
         User.objects.all().delete()
         Director.objects.all().delete()
-        Actor.objects.all().delete()
-        Genre.objects.all().delete()
 
         print("Tables dropped successfully")
 
-        director_list,artist_list,genre_list = [],[],[]
+        director_list = []
         base_dir = Path(__file__).resolve().parent.parent.parent.parent
         
-        with open(f'{base_dir}/movie_store/data/movie_clean.csv', 'r') as file:
+        with open(f'{base_dir}/movie_store/data/movie_clean_big.csv', 'r') as file:
             csvfile = csv.reader(file, delimiter=";")
             next(csvfile)
             for count, line in enumerate(csvfile):
-                print("line",count+1)
+                print("Processing line",count+1)
 
-                director = re.findall("(?:\"|\')(.*?)(?:\"|\')",line[13])[0]
-                print(director)
+                #director = re.findall("(?:\"|\')(.*?)(?:\"|\')",line[13])[0]
+                directors = line[13]
+                res = ast.literal_eval(directors)
+                director = res[0]
                 if director not in director_list:
                     director_list.append(director)
                     director_name = Director.objects.create(name=director)
                     director_name.save()
 
-                actor_line = re.findall("(?:\"|\')(.*?)(?:\"|\')",line[9])
-                genre_line = re.findall("(?:\"|\')(.*?)(?:\"|\')",line[10])
-                for i in range(4):
-                    try:
-                        if actor_line[i] not in artist_list:
-                            artist_list.append(actor_line[i])
-                            artist_name = Actor.objects.create(name=actor_line[i])
-                            artist_name.save()
-                    except IndexError:
-                        break
+                actors_str = line[9]
+                res = ast.literal_eval(actors_str)
+                actor = ""
+                for count,i in enumerate(res):
+                    if count == len(res)-1:
+                        actor += i
+                    else:
+                        actor += f"{i}, "
                 
-                for i,num in enumerate(genre_line):
-                    try:
-                        if i < 4:
-                            if genre_line[i] not in genre_list:
-                                genre_list.append(genre_line[i])
-                                genre_name = Genre.objects.create(genre=genre_line[i])
-                                genre_name.save()
-                        else:
-                            break
-                    except IndexError:
-                        break
-
+                genres_str = line[10]
+                res = ast.literal_eval(genres_str)
+                genre = ""
+                for count,i in enumerate(res):
+                    if count == len(res)-1:
+                        genre += i
+                    else:
+                        genre += f"{i}, "
+                
                 movie_name = Movie(
                     title = line[0],
                     rating = line[1],
                     year_released = int(line[2][0:4]),
                     imdb_rating = line[3],
                     imdb_votes = line[4],
+                    actor=actor,
+                    genre=genre,
                     metascore = int(line[5].split(".")[0]),
                     poster_link = line[6],
                     tagline = line[11],
@@ -80,24 +78,6 @@ class Command(BaseCommand):
                     imdb_link = line[15],
                     price = int(decimal.Decimal(random.randrange(155,899))/100),
                 )
-                movie_name.save()
-
-                for i in range(4):
-                    try:
-                        artist_add = Actor.objects.get(name=actor_line[i])
-                        movie_name.actor.add(artist_add)
-                    except IndexError:
-                        break
-
-                for i,num in enumerate(genre_line):
-                    try:
-                        if i < 4:
-                            genre_add = Genre.objects.get(genre=genre_line[i])
-                            movie_name.genre.add(genre_add)
-                        else:
-                            break
-                    except IndexError:
-                        break
                 movie_name.save()
 
         fake = Faker()

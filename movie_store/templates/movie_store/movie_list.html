@@ -43,13 +43,7 @@ Movie List - Movie Store
                         </p>
                         {{ movie.imdb_rating }}/10 ({{ movie.imdb_votes }} votes)
                         <p>
-                            {% for genre in movie.genre.all %}
-                            {% if not forloop.last %}
-                                {{ genre }},
-                            {% else %}
-                                {{ genre }}
-                            {% endif %}
-                            {% endfor %}
+                            {{ movie.genre }}
                             <br>
                         </p>
                         <div class="lower-back-card">

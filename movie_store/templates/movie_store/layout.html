@@ -14,7 +14,7 @@
                     <div class="body-top">
                         <a href="/" style="text-decoration: none;"><h1 class="page-title">Movie Store</h1></a>
                         <div class="second-header">
-                            <a href="/" style="text-decoration: none;"><h3 class="page-title-meta">Why use Netflix if you can own the films?</h3></a>
+                            <a href="/" style="text-decoration: none;"><h3 class="page-title-meta">For when Netflix is down and you need alternatives.</h3></a>
                             <div class="search-container">
                                 <form method="POST" action="/search/">
                                     {% csrf_token %}
@@ -22,7 +22,7 @@
                                     <button type="submit">Go</button>
                                     <br>Filter by:
                                     <input type="radio" name="search" value="title" checked>Title
-                                    <input type="radio" name="search" value="artist">Artist
+                                    <input type="radio" name="search" value="genre">Genre
                                     <input type="radio" name="search" value="director">Director 
                                     <br>
                                 </form>

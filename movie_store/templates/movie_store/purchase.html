@@ -14,11 +14,16 @@
    <p>
     <form action="/payment/" method="post">
        {% csrf_token %}
-       <p>Complete the form to buy this all for yourself</p>
+       <p>Complete the form below to purchase:</p>
        <input type='text' name='first_name' value="{{user.first_name}}" disabled>
        <input type='text' name='last_name' value="{{user.last_name}}" disabled><br>
-       <label for 'payment'>Card Type:</label><input type='text' size=5 name='payment'>
-       <input type="number" name="total" value="Total Payment:">
+       <label for 'payment'>Card Type:</label>
+       <select id="payment">
+         <option>IOU</option>
+         <option>Mastercard</option>
+         <option>Visa</option>
+       </select>
+       <input type="number" name="card_number" required>
        <input type="submit" value="Pay Now">
        </form>
        </p>
