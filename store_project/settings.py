@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'movie_store.apps.MovieStoreConfig',
     'whitenoise.runserver_nostatic',
+    'behave_django',
 ]
 
 MIDDLEWARE = [

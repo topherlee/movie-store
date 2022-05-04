@@ -55,7 +55,10 @@ def movie_list(request):
     ids = Movie.objects.count()
     first = Movie.objects.first().id
     last = Movie.objects.last().id
-    randoms = Movie.objects.get(id=random.randint(first,last))
+    if Movie.objects.get(id=random.randint(first,last)) == None:
+        randoms = Movie.objects.first()
+    else:
+        randoms = Movie.objects.get(id=random.randint(first,last))
    
     context = {
         'page_obj':page_obj,

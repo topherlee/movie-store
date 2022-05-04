@@ -23,7 +23,7 @@
                                     <br>Filter by:
                                     <input type="radio" name="search" value="title" checked>Title
                                     <input type="radio" name="search" value="genre">Genre
-                                    <input type="radio" name="search" value="director">Director 
+                                    <input type="radio" name="search" id="director" value="director">Director 
                                     <br>
                                 </form>
                             </div>
@@ -59,6 +59,7 @@
                             <li style="float:right"><a href="/accounts/logout" >Logout ({{ user.get_username }})</a></li>
                             {% else %}
                             <li style="float:right"><a href="/accounts/login">Login</a></li>
+                            <li style="float:right"><a href="/signup/">Sign Up</a></li>
                             {% endif %}
                         </ul>
                     </nav>
