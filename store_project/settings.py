@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--3b!4s(5k)=bv%zwv2%wq!15ie$l+m4g=d%ja$2t#)dt(7@_2t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','localhost','store-movies.herokuapp.com']
 
