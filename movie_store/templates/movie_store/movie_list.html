@@ -16,11 +16,11 @@ Movie List - Movie Store
             <option value="-title">Title (Z-A)</option>
             <option value="-year_released">Release Year (Descending)</option>
             <option value="year_released">Release Year (Ascending)</option>
-            <option value="-imdb_rating">IMDb Rating (Decending)</option>
+            <option value="-imdb_rating">IMDb Rating (Descending)</option>
             <option value="imdb_rating">IMDb Rating (Ascending)</option>
         </select>
         <button type="submit">Go</button>
-        <br><br>Currently Showing Movies Sorted by {{ sort }}
+        <br><br>Currently Showing Movies Sorted by <b>{{ sort }}</b>
     </form>
 </div>
 <div class="page-movie">
@@ -60,6 +60,7 @@ Movie List - Movie Store
         </div>
         <a href='{% url 'movie_details' id=movie.id %}'>
             <span class="movie-title">{{ movie.title|upper }}</span>
+            <span style="position: relative;left: 40%;"><b>${{ movie.price }}</b></span>
         </a>
     </div>
     {% endfor %}

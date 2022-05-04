@@ -19,6 +19,7 @@
          <img src="{{ movie.poster_link }}">
          <p><b>Watch the trailer</b></p>
       </a>
+      <h3><b>${{ movie.price }}</b></h3>
       <form action="{% url 'basket_add' movie.id %}" method="post">
          {{ basket_movie_form }}
          {% csrf_token %}
