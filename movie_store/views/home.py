@@ -77,7 +77,7 @@ def search(request):
     if search == "director":
         results = Director.objects.filter(name__iregex=fr"{query}")    #director__name__contains=f'{query}')
     elif search == "title":
-        results = Movie.objects.filter(title__iregex=fr"({query})")
+        results = Movie.objects.filter(title__iregex=fr"({query})").order_by("title")
     elif search == "genre":
         results = Movie.objects.filter(genre__iregex=fr"({query})")
 

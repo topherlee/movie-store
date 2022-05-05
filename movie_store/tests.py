@@ -17,21 +17,34 @@ class LoginPageTest(TestCase):
         user.save()
         Customer.objects.filter(user_id=1).update(address="Nesselweg 45, Cologne 51109, Germany")
 
-    def test_login(self):
-        login = self.client.login(username="test_account", password="p@ssw0rd")
-        self.assertTrue(login)
+    def login(self, username="test_account", password="p@ssw0rd"):
+        login = self.client.login(username=username, password=password)
+        return login
 
-    def test_rendered_template(self):
+    def test_login_successful(self):
+        self.assertTrue(self.login())
+        response = self.client.get('/my_details/')
+        self.assertEqual(str(response.context['user']),"test_account")
+        self.assertContains(response,"Test Account")
+
+    def test_login_fail(self):
+        self.assertFalse(self.login(username="test_account", password="123456789"))
+
+    def test_loginpage_rendered_template(self):
         response = c.get('/accounts/login/')
         self.assertEqual (response.status_code, 200)
         self.assertTemplateUsed(response, 'registration/login.html')
+
+    def test_mydetails_rendered_template(self):
+        self.login()
+        response = self.client.get('/my_details/')
+        self.assertTemplateUsed(response, 'movie_store/customer_details.html')
 
 
 class MoviesTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        print("setUpTestData: Run once to set up non-modified data for all class methods.")
         Director.objects.create(name="Francis Ford Coppola").save()
         Movie.objects.create(
             title="The Godfather",
@@ -56,6 +69,7 @@ class MoviesTest(TestCase):
         self.assertContains(response, "The Godfather")
         self.assertTemplateUsed(response, 'movie_store/movie_list.html')
         self.assertEqual(response.status_code,200)
+        self.assertTrue(len(response.context['page_obj'])== 1)
 
     def test_movie_details(self):
         response = c.get('/movie_details/1/')
