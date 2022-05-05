@@ -35,13 +35,16 @@ class Command(BaseCommand):
                 print("Processing line",count+1)
 
                 #director = re.findall("(?:\"|\')(.*?)(?:\"|\')",line[13])[0]
-                directors = line[13]
-                res = ast.literal_eval(directors)
-                director = res[0]
-                if director not in director_list:
-                    director_list.append(director)
-                    director_name = Director.objects.create(name=director)
-                    director_name.save()
+                try:
+                    directors = line[13]
+                    res = ast.literal_eval(directors)
+                    director = res[0]
+                    if director not in director_list:
+                        director_list.append(director)
+                        director_name = Director.objects.create(name=director)
+                        director_name.save()
+                except IntegrityError:
+                    pass
 
                 actors_str = line[9]
                 res = ast.literal_eval(actors_str)
@@ -89,16 +92,19 @@ class Command(BaseCommand):
             last_name = str(last_name[0])
             username = first_name + last_name,
             username = username[0]
-            user = User.objects.create_user(
-            username = username,
-            first_name = first_name,
-            last_name = last_name,
-            email = fake.ascii_free_email(), 
-            password = 'p@ssw0rd')
-            customer = Customer.objects.get(user = user)
-            customer.address = fake.address(),
-            customer.address = str(customer.address[0])
-            customer.save()
+            try:
+                user = User.objects.create_user(
+                    username = username,
+                    first_name = first_name,
+                    last_name = last_name,
+                    email = fake.ascii_free_email(), 
+                    password = 'p@ssw0rd')
+                customer = Customer.objects.get(user = user)
+                customer.address = fake.address(),
+                customer.address = str(customer.address[0])
+                customer.save()
+            except IntegrityError:
+                next
 
         products = list(Movie.objects.all())
         for i in range(10):
@@ -128,19 +134,5 @@ class Command(BaseCommand):
                     order = order,
                 )
                 line_item.save()
-                """
-                title = line[0]
-                rating = line[1]
-                year = line[2]
-                imdb_rating = line[3]
-                imdb_votes = line[4]
-                metascore = line[5]
-                poster_link = line[6]
-                actors = line[9]
-                genre = line[10]
-                tagline = line[11]
-                plot_summary = line[12]
-                director = line[13]
-                runtime = line[14]
-                imdb_url = line[15]
-                """
+        
+        print("CSV Parsing done")

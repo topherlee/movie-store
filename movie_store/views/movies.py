@@ -43,6 +43,10 @@ def movie_list(request):
         sort = "IMDb Rating (Descending)"
     elif sort_by == "imdb_rating":
         sort = "IMDb Rating (Ascending)"
+    elif sort_by == "-price":
+        sort = "Price (Descending)"
+    elif sort_by == "price":
+        sort = "Price (Ascending)"
     else:
         sort = "Title (A-Z)"
     

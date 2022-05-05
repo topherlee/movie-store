@@ -36,6 +36,7 @@
    </div>
    <div class="movie-info-container">
       <p class="card">IMDb Rating <a href = "{{ movie.imdb_link }}" target="_blank"><b>{{ movie.imdb_rating }}</b>/10 ({{ movie.imdb_votes }} votes)</a></p>
+      <p class="card">Metascore: {{ movie.metascore }}</p>
       <p class="card">Genre 
          <br>
          {{ movie.genre }}
@@ -44,7 +45,7 @@
 
       <p class="card">Tagline <br> {{ movie.tagline }}</p>
 
-      <p class="card">Director <br> {{ movie.director.name }}</p>
+      <p class="card">Director <br> <a href="{% url 'movie_from_director' id=movie.director.id %}">{{ movie.director.name }}</a></p>
       <p class="card">
          Cast
          <br>
