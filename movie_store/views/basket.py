@@ -17,13 +17,8 @@ class Basket(object):
         self.basket = basket
 
     def __iter__(self):
-        """
-        Iterate over the items in the basket and get the products
-        from the database.
-        """
         print(f'basket: { self.basket }')
         movie_ids = self.basket.keys()
-        # get the product objects and add them to the basket
         movies = Movie.objects.filter(id__in=movie_ids)
 
         basket = self.basket.copy()
@@ -37,15 +32,9 @@ class Basket(object):
             yield item
 
     def __len__(self):
-        """
-        Count all items in the basket.
-        """
         return sum(item['quantity'] for item in self.basket.values())
 
     def add(self, movie, quantity=1, override_quantity=False):
-        """
-        Add a movie to the basket or update its quantity.
-        """
         movie_id = str(movie.id)
         if movie_id not in self.basket:
             self.basket[movie_id] = {'quantity': 0,
@@ -57,20 +46,15 @@ class Basket(object):
         self.save()
 
     def save(self):
-        # mark the session as "modified" to make sure it gets saved
         self.session.modified = True
 
     def remove(self, movie):
-        """
-        Remove a product from the basket.
-        """
         movie_id = str(movie.id)
         if movie_id in self.basket:
             del self.basket[movie_id]
             self.save()
 
     def clear(self):
-        # remove basket from session
         del self.session[settings.BASKET_SESSION_ID]
         self.save()
 

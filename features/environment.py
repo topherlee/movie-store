@@ -34,7 +34,7 @@ def after_scenario(context, scenario):
 """
 
 def after_feature(context, feature):
-    if feature.name == "signup":
+    if feature.name == "Signup":
         conn = connections['default']
         conn.connect()
         if User.objects.last().username == "test_account":

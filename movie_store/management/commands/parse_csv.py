@@ -1,8 +1,8 @@
 import csv
 import random
 import decimal
-import re
-from datetime import datetime
+#import re
+#from datetime import datetime
 from pathlib import Path
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError

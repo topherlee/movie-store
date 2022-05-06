@@ -1,11 +1,11 @@
 {% extends 'movie_store/layout.html' %}
+
 {% block title %}
 Director Details - Movie Store
 {% endblock %}
-{% block content %}
 
+{% block content %}
 <h1>{{ director.name }}'s Movies</h1>
-    
 <div class="page-movie">
     {% for result in movies %}
     <div class="movie-card">

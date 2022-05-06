@@ -6,30 +6,30 @@ Customer Details - Movie Store
 
 {% block content %}
 {% with users=customer.user %}
-<h1>{{ users.first_name }} {{ users.last_name }} ({{ users }})</h1>
-{% if users == request.user %}
-<a href="{% url 'customer_modify' %}" style="color: cornflowerblue;">Edit Information</a>
-{% endif %}
-<p><b>Registered email:</b><br>{{ users.email }}</p>
-<p>
-    <b>Shipping address: <br></b>{{ customer.address }}.
-</p>
-<iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?q={{ customer.address }}&key=AIzaSyBfIreV_7IiQbwrZ2WOUNm0Tqk4xbN-9lY"></iframe>
-
-<h3>Orders:</h3>
-{% if orders %}
-    {% for order in orders %}
-        {% if request.user.username == users.username %}
-        <p>Your <b>#{{ forloop.counter }}</b> order was placed on: {{ order.created_date }} <a href="{% url 'order_details' id=order.id %}" style="color: cornflowerblue;">View order</a>.
-        </p>
-        {% else %}
-        <p>This is order <b><a href="{% url 'order_details' id=order.id %}">{{ order.id }}</a></b> for
-            {{order.customer.user.first_name}} {{order.customer.user.last_name}}. The order was placed on: {{ order.created_date }} 
-        </p>
-        {% endif %}
-    {% endfor %}
-{% else %}
-    <h3 style="text-align: center;">No orders placed yet.</h3>
-{% endif %}
+    <h1>{{ users.first_name }} {{ users.last_name }} ({{ users }})</h1>
+    {% if users == request.user %}
+        <a href="{% url 'customer_modify' %}" style="color: cornflowerblue;">Edit Information</a>
+    {% endif %}
+    <p>
+        <b>Registered Email:</b><br>{{ users.email }}
+    </p>
+    <p>
+        <b>Shipping Address: <br></b>{{ customer.address }}
+    </p>
+    <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?q={{ customer.address }}&key=AIzaSyBfIreV_7IiQbwrZ2WOUNm0Tqk4xbN-9lY"></iframe>
+    <h3>Orders:</h3>
+    {% if orders %}
+        {% for order in orders %}
+            {% if request.user.username == users.username %}
+                <p>Your <b>#{{ forloop.counter }}</b> order was placed on: {{ order.created_date }} <a href="{% url 'order_details' id=order.id %}" style="color: cornflowerblue;">View order</a>
+                </p>
+            {% else %}
+                <p>Order ID <b>#{{ order.id }}</b> for {{order.customer.user.first_name}} {{order.customer.user.last_name}} was placed on {{ order.created_date }} <a href="{% url 'order_details' id=order.id %}" style="color: cornflowerblue;">View order</a>
+                </p>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <h3 style="text-align: center;">No orders placed yet.</h3>
+    {% endif %}
 {% endwith %}
 {% endblock %}

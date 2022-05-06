@@ -28,7 +28,6 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
 
-
 def payment(request):
     if request.user.is_authenticated:
         basket = Basket(request)
@@ -91,3 +90,4 @@ def search(request):
         'page_obj':page_obj,
         }
     return render(request, 'movie_store/search.html', context)
+    

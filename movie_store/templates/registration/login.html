@@ -1,32 +1,32 @@
 {% extends 'movie_store/layout.html' %}
+
 {% block title %}
 Login - Movie Store
 {% endblock %}
+
 {% block content %}
-    <h1>Login</h1>
-    {% if form.errors %}
-       <p style="color:red">Your username and password does not match. Please try again.</p>
-    {% endif %}
-    {% if next %}
-    {% if user.is_authenticated %}
-    <p style="color:red">Your account does not have access to this page. Please login with an account that has access to proceed.</p>
-    {% else %}
-     
-    {% endif %}
+<h1>Login</h1>
+{% if form.errors %}
+    <p style="color:red">Your username and password does not match. Please try again.</p>
+{% endif %}
+{% if next %}
+  {% if user.is_authenticated %}
+  <p style="color:red">Your account does not have access to this page. Please login with an account that has access to proceed.</p>
   {% endif %}
-  <p>New customer? <a href = "{% url 'signup' %}" style="color:cornflowerblue">Register here</a>.</p>
-  <form method="POST" action="{% url 'login' %}"> 
-    {% csrf_token %}
-    <p>
-      {{ form.username.label_tag }}
-      {{ form.username }}
-    </p>
-    <p>
-      {{form.password.label_tag }}
-      {{form.password }}
-    </p>
-      <input type="submit" name="Login">
-      <input type="hidden" name='next' value="{{ next }}">
-   </p>
+{% endif %}
+<p>New customer? <a href = "{% url 'signup' %}" style="color:cornflowerblue">Register here</a>.</p>
+<form method="POST" action="{% url 'login' %}"> 
+  {% csrf_token %}
+  <p>
+    {{ form.username.label_tag }}
+    {{ form.username }}
+  </p>
+  <p>
+    {{form.password.label_tag }}
+    {{form.password }}
+  </p>
+    <input type="submit" name="Login">
+    <input type="hidden" name='next' value="{{ next }}">
+  </p>
 </form>
-    {% endblock %}
+{% endblock %}

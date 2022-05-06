@@ -3,12 +3,11 @@
 Order List - Movie Store
 {% endblock %}
 {% block content %}
-  <h1>Order List</h1>
-  
-  {% for order in orders %}
-  <p>This is order ID <b><a href="{% url 'order_details' id=order.id %}"> #{{order.id }}</a></b> for
-     {{order.customer.user.first_name}} {{order.customer.user.last_name}}. The order was placed on: {{ order.created_date }} 
-  </p>
-  {% endfor %}
-
-  {% endblock %}
+<h1>Order List</h1>
+{% for order in orders %}
+   <p>Order ID <b> #{{order.id }}</b> for
+      {{order.customer.user.first_name}} {{order.customer.user.last_name}}, placed on: {{ order.created_date }}
+      <a href="{% url 'order_details' id=order.id %}" style="color: cornflowerblue;">View order</a>
+   </p>
+{% endfor %}
+{% endblock %}

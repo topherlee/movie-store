@@ -1,30 +1,35 @@
 {% extends 'movie_store/layout.html' %}
+
+{% block title %}
+Payment - Movie Store
+{% endblock %}
+
 {% block content %}
-    <h1>Your Order</h1>
-    
-<h2>You have these in your basket:</h2>
-  {% for item in basket %}
-    {% with product=item.movie %}
- 
-<p>{{ forloop.counter }}:<b> {{ product.title }} </b>{{ item.quantity }} x
-    ${{ item.price }}/unit = ${{ item.total_price }}.</p>
-     {% endwith %}
-   {% endfor %}
- <h1><b>Total ({{ total_item }}) {% if total_item < 2 %}item{% else %}items{% endif %}: ${{ basket.get_total_price }}</b></h1>
-   <p>
-    <form action="/payment/" method="post">
-       {% csrf_token %}
-       <p>Complete the form below to purchase:</p>
-       <input type='text' name='first_name' value="{{user.first_name}}" disabled>
-       <input type='text' name='last_name' value="{{user.last_name}}" disabled><br>
-       <label for 'payment'>Card Type:</label>
-       <select id="payment">
-         <option>IOU</option>
-         <option>Mastercard</option>
-         <option>Visa</option>
-       </select>
-       <input type="number" name="card_number" required>
-       <input type="submit" value="Pay Now">
-       </form>
-       </p>
+<h1>Your Order</h1>  
+<h2>Items in Your Basket:</h2>
+{% for item in basket %}
+  {% with product=item.movie %}
+    <p>
+      Title #{{ forloop.counter }}:<b> {{ product.title }}</b> 
+      <br>Quantity: {{ item.quantity }} x
+    ${{ item.price }}/unit = <b>${{ item.total_price }}</b></p>
+  {% endwith %}
+{% endfor %}
+<h1><b>Total ({{ total_item }} {% if total_item < 2 %}item){% else %}items){% endif %}: ${{ basket.get_total_price }}</b></h1>
+<p>
+  <form action="/payment/" method="post">
+    {% csrf_token %}
+    <p>Complete the form below to purchase:</p>
+    <input type='text' name='first_name' value="{{user.first_name}}" disabled>
+    <input type='text' name='last_name' value="{{user.last_name}}" disabled><br>
+    <label for 'payment'>Card Type:</label>
+    <select id="payment">
+      <option>IOU</option>
+      <option>Mastercard</option>
+      <option>Visa</option>
+    </select>
+    <input type="number" name="card_number" required>
+    <input type="submit" value="Pay Now">
+  </form>
+</p>
  {% endblock %}

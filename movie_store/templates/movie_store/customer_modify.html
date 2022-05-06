@@ -1,14 +1,15 @@
 {% extends 'movie_store/layout.html' %}
+
 {% block title %}
 Modify Customer Details - Movie Store
 {% endblock %}
+
 {% block content %}
 <h1>Edit Information for {{ request.user.first_name }} {{ request.user.last_name }} {{ request.user.customer }}</h1>
 <form method="POST">
     {% csrf_token %}
     {{ user_form.as_p }}
-    {{ customer_form.as_p }}
+    Shipping {{ customer_form }}
     <button type="submit">Save Changes</button>
 </form>
-
 {% endblock %}

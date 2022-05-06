@@ -1,14 +1,16 @@
 {% extends 'movie_store/layout.html' %}
+
 {% block title %}
 Add a Movie - Movie Store
 {% endblock %}
+
 {% block content %}
 <h1>Product Edit</h1>
 <p>Movie:
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
 </p>
 {% endblock %}

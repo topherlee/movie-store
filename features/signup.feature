@@ -1,4 +1,4 @@
-Feature: signup 
+Feature: Signup 
   # Confirm that we sign up to the site
 
   Scenario: Success for signing up as member
