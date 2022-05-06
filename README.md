@@ -1,5 +1,5 @@
-# <a href = "http://lollingstone.herokuapp.com">movie-store</a>
-A Django e-commerce website.
+# <a href = "http://store-movies.herokuapp.com">movie-store</a>
+A Django e-commerce website by Christopher Lee (52105866)
 
 # Installation
 ### IMPORTANT: <br> To run behave test use this command: ```python manage.py behave --use-existing-database```
@@ -31,6 +31,7 @@ Update quantity or remove movie from the basket.
 
 <b>Registered user</b>:
 All features of the unregistered user plus:
+Leave review for movies.
 Basket checkout and place an order.
 Show my details and my shipping address on a map.
 Show my orders and list of items in the order.
@@ -46,7 +47,10 @@ Add and modify details of a movie.
 The app is developed by using Django framework and deployed to Heroku. PostgreSQL is used for the database of Heroku version while SQLite3 is used for the database of local version. Testing is done using Behave (behave-django) along with Selenium and Django built-in TestCase.
 
 # Technical Details
-Database: PostgreSQL (Heroku) and SQLite3 (local)
-<br>
-Tables: 7 Tables
-
+Framework: Django 
+Database: PostgreSQL (Heroku) and SQLite3 (local)<br>
+Tables: 7 Tables<br>
+Number of movies: 4500 titles<br>
+Testing: Behave (behave-django, Selenium), Django TestCase<br>
+Maps: Google Maps<br>
+Dataset Source: <a href="https://www.kaggle.com/datasets/gorochu/complete-imdb-movies-dataset">Kaggle</a>
