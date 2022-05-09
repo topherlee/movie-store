@@ -1,4 +1,5 @@
-# <a href = "http://store-movies.herokuapp.com">movie-store</a>
+# movie-store
+# <a href = "http://store-movies.herokuapp.com">LINK TO LIVE VERSION</a>
 A Django e-commerce website by Christopher Lee (52105866)
 
 # Installation
