@@ -31,6 +31,15 @@ body{
     padding: 0 100px;
     color: black;
 }
+@media (max-width: 1410px){
+    .main-body{
+        margin-top: 2%;
+        margin-left: 5%;
+        margin-right: 5%;
+        padding: 0 50px;
+        color: black;
+    }
+}
 
 .main-body h1{
     font-weight: 300;
@@ -52,16 +61,21 @@ a:hover{
 }
 
 .body-top{
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-template-rows: 50% 50%;
     background-color: #151414;
     word-spacing: 4px;
-    padding: 0;
+    padding-top: 3vh;
     margin: 0;
-    height: 90px;
+    height: 10vh;
     width: 100%;
 }
 
-.body-top h1{
-    margin-left: 5%;
+.body-top .page-title{
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    margin: 0 0 0 10%;
     color: #fff;
     -webkit-animation: glow 1s ease-in-out infinite alternate;
     -moz-animation: glow 1s ease-in-out infinite alternate;
@@ -78,12 +92,54 @@ a:hover{
 }
 
 .second-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-left: 4%;
-    height: 20px;
-    padding-top: 5px;
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    margin: -0.5rem 0 0 10%;
+    color: white;
+}
+
+.search-container{
+    grid-row: 1 / 3;
+    grid-column: 2 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: right;
+    font-size: 15px;
+    color: white;
+}
+
+.search-icon{
+    height: 24px;
+}
+
+@media (max-width: 620px) {
+    .body-top{
+        grid-template-columns: 100vw;
+        grid-template-rows: 25% 25% 50%;
+        height: 30vw;
+        padding-top: 15px;
+    }
+
+    .body-top .page-title{
+        grid-area: 1 / 1 / 2 / 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 20px;
+    }
+    
+    .second-header{
+        display: none;
+    }
+
+    .search-container{
+        grid-area: 2 / 1 / 4 / 2;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+    }
 }
 
 .nav{
@@ -92,6 +148,7 @@ a:hover{
     top: 0;
     background-color: #2f2b30;
     height: auto;
+    width: 100%;
     margin-top: -20px;
     z-index: 10;
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -99,9 +156,11 @@ a:hover{
 
 .nav-buttons{
     list-style-type: none;
-    margin-left: 5%;
+    display: flex;
+    flex-wrap: wrap;
     overflow: hidden;
     padding: 5px 0px;
+    margin-left: 6%;
     margin-right: 5%;
 }
 
@@ -171,42 +230,8 @@ a:hover{
     color:white;
 }
 
-
-
 #nav-span{
     word-spacing: 2px;
-}
-
-.page-title{
-    color: white;
-    padding-top: 10px;
-    margin: 0 -10px;
-}
-
-.page-title-meta{
-    color: white;
-    margin: 0.2px 2%;
-    word-spacing: normal;
-    width: 100%;
-}
-
-.search-container{
-    float: right;
-    padding: 5px 15px;
-    margin-top: -25px;
-    margin-right: 16px;
-    font-size: 15px;
-    color: white;
-}
-
-.search-bar{
-    margin: auto;
-    width: 400px;
-    height: 30px;
-}
-
-.search-icon{
-    height: 24px;
 }
 
 .pagination{
@@ -219,13 +244,57 @@ a:hover{
 }
 
 .second-title-bar{
-    position: relative;
+    display: grid;
+    grid-template-columns: 75% 25%;
+    grid-template-rows: 7vh 7vh;
+}
+
+.second-title-bar h1{
+    grid-area: 1 / 1 / 2 / 2;
+    flex-shrink: 3;
 }
 
 .second-title-bar .random-button{
-    position: absolute;
-    top: -5px;
-    right: 0px;
+    grid-area: 1 / 2 / 3 / 3;
+    min-width: 25%;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+@media (max-width: 728px){
+    .second-title-bar .random-button{
+        justify-content: start;
+        margin-bottom: 20px;
+    }
+}
+
+.second-title-bar .sort{
+    grid-area: 2 / 1 / 3 / 3;
+    flex-grow: 1;
+    height: max-content;
+}
+@media (max-width: 600px){
+    .second-title-bar{
+        grid-template-columns: 100%;
+        grid-template-rows: 7vh 10vh 7vh;
+    }
+
+    .second-title-bar .random-button{
+        grid-area: 2 / 1 / 3 / 2;
+        min-width: 25%;
+        flex-grow: 1;
+    }
+
+    .second-title-bar .sort{
+        grid-area: 3 / 1 / 4 / 2;
+        flex-grow: 1;
+        margin-bottom: 40px;
+    }
+
+    .page-movie{
+        padding-top: 50px;
+    }
 }
 
 .button:hover {
@@ -434,8 +503,9 @@ a:hover{
 @media (max-width: 800px) {
     .movie-row {
       flex-direction: column;
+      align-items: center;
     }
-  }
+}
 
 .movie-poster{
     text-align: center;
@@ -447,7 +517,6 @@ a:hover{
     width: 275px;
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
 
 .movie-poster .button3{
     background-color: red;

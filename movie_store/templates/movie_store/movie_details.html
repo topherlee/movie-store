@@ -46,19 +46,19 @@
       </p>
    </div>
 </div>
+<div class="recently-viewed">
 {% if recently_viewed_movies %}
-   <div class="recently-viewed">
-      <h3>Recently viewed titles:</h3>
-      {% for movie in recently_viewed_movies %}
-         <div class="small-poster">
-            <a href="{% url 'movie_details' id=movie.id %}">
-            <img src="{{ movie.poster_link }}" class="recent-poster">
-            <p class="small-title">{{ movie.title }}</p>
-            </a>
-         </div>
-      {% endfor %}
-   </div>
+   <h3>Recently viewed titles:</h3>
+   {% for movie in recently_viewed_movies %}
+      <div class="small-poster">
+         <a href="{% url 'movie_details' id=movie.id %}">
+         <img src="{{ movie.poster_link }}" class="recent-poster">
+         <p class="small-title">{{ movie.title }}</p>
+         </a>
+      </div>
+   {% endfor %}
 {% endif %}
+</div>
 <div class="comment-section">
    {% if user.is_authenticated %}
       <div class="comment-box ">

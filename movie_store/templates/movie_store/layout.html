@@ -5,7 +5,7 @@
             {% block title %}{% endblock %}
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{% static 'movie_store/styles.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'movie_store/styles.css' %}">
     </head>
     {% block body %}
     <body>
@@ -13,20 +13,18 @@
             <div class="wrapper">
                 <div class="body-top">
                     <a href="/" style="text-decoration: none;"><h1 class="page-title">Movie Store</h1></a>
-                    <div class="second-header">
-                        <a href="/" style="text-decoration: none;"><h3 class="page-title-meta">For when Netflix is down and you need alternatives.</h3></a>
-                        <div class="search-container">
-                            <form method="POST" action="/search/">
-                                {% csrf_token %}
-                                <input class="search-bar" type="search" placeholder="Search something" name="query" required>
-                                <button type="submit">Go</button>
-                                <br>Filter by:
-                                <input type="radio" name="search" value="title" checked>Title
-                                <input type="radio" name="search" value="genre">Genre
-                                <input type="radio" name="search" id="director" value="director">Director 
-                                <br>
-                            </form>
-                        </div>
+                    <a href="/" style="text-decoration: none;"><h3 class="second-header">For when Netflix is down and you need alternatives.</h3></a>
+                    <div class="search-container">
+                        <form method="POST" action="/search/">
+                            {% csrf_token %}
+                            <input class="search-bar" type="search" placeholder="Search something" name="query" size="30" required>
+                            <button type="submit">Go</button>
+                            <br>Filter by:
+                            <input type="radio" name="search" value="title" checked>Title
+                            <input type="radio" name="search" value="genre">Genre
+                            <input type="radio" name="search" id="director" value="director">Director 
+                            <br>
+                        </form>
                     </div>
                 </div>
                 {% block navbar %}

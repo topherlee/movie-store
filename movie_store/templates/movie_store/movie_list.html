@@ -7,8 +7,11 @@ Movie List - Movie Store
 {% block content %}
 <div class="second-title-bar">
     <h1>Movie List</h1>
-    <a href="{% url 'movie_details' id=randoms.id %}"><button class="random-button button">Pick a Random Movie for Me!</button></a>
-    <form method="post" action="{% url 'movie_list' %}">
+    <a href="{% url 'movie_details' id=randoms.id %}">
+    <div class="random-button">
+        <button class="button">Pick a Random Movie for Me!</button></a>
+    </div>
+    <form class="sort" method="post" action="{% url 'movie_list' %}">
         {% csrf_token %}
         <label for="sort">Sort Movies by:</label>
         <select name="sort" id="sort">
